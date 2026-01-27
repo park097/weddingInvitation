@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Reveal from "@/components/Reveal";
 import SectionCard from "@/components/SectionCard";
@@ -28,28 +28,29 @@ export default function InvitationSection({
         >
           소중한 분들을 초대합니다.
           <br />
-          저희 두 사람의 작은 만남이 사랑의 결실을 이루어
+          함께한 모든 순간이 감사했고,
           <br />
-          소중한 결혼식을 올리게 되었습니다.
+          이제 두 사람이 한 길을 걸어가려 합니다.
           <br />
-          평생 서로 귀하게 여기며 첫 마음 그대로 존중하고 배려하며
-          살아가겠습니다.
+          따뜻한 마음으로 축복해 주세요.
         </Reveal>
         <Reveal
           initialVisible
           className="mt-6 text-base leading-7 text-neutral-600"
         >
-          김진호 · 이미자 의 아들 김진호
+          김진호 · 이나연
           <br />
-          이주명 · 유수지 의 딸 이나은
+          김건호 · 김어머니의 장남
+          <br />
+          이주모 · 이수진의 장녀
         </Reveal>
         <Reveal initialVisible className="mt-2">
           <button
             type="button"
-            className="h-12 w-30 rounded-xl border border-neutral-200 bg-white text-sm font-medium shadow-sm"
+            className="ui-rounded h-12 w-32 border border-neutral-200 bg-white text-sm font-medium shadow-sm"
             onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
           >
-           ☏ 연락하기
+            연락하기
           </button>
         </Reveal>
       </SectionCard>

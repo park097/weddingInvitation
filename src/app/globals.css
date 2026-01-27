@@ -1,22 +1,23 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
-  --paper: #f8f5f1;
+  --paper: #F5F5F3;
   --ink: #2a2623;
   --muted: #7a6f68;
-  --card: #ffffff;
+  --card: #FCFCFA;
   --accent: #e7b8a4;
-  --font-sans: var(--font-maru-buri);
-  --font-serif: var(--font-maru-buri);
-  --font-display: var(--font-maru-buri);
+  --radius-lg: 18px;
+  --font-sans: var(--font-pretendard);
+  --font-serif: var(--font-pretendard);
+  --font-display: var(--font-pretendard);
 }
 
 @theme inline {
   --color-background: var(--paper);
   --color-foreground: var(--ink);
-  --font-sans: var(--font-maru-buri);
-  --font-serif: var(--font-maru-buri);
-  --font-display: var(--font-maru-buri);
+  --font-sans: var(--font-pretendard);
+  --font-serif: var(--font-pretendard);
+  --font-display: var(--font-pretendard);
 }
 
 * {
@@ -29,15 +30,12 @@ html {
 
 body {
   min-height: 100%;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(231, 184, 164, 0.25), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(210, 205, 198, 0.25), transparent 45%),
-    var(--paper);
+  background: var(--paper);
   color: var(--ink);
-  --font-sans: var(--font-maru-buri);
-  --font-serif: var(--font-maru-buri);
-  --font-display: var(--font-maru-buri);
-  font-family: var(--font-maru-buri);
+  --font-sans: var(--font-pretendard);
+  --font-serif: var(--font-pretendard);
+  --font-display: var(--font-pretendard);
+  font-family: var(--font-pretendard);
   letter-spacing: -0.01em;
 }
 
@@ -65,6 +63,22 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-gutter: stable;
+}
+
+.ui-surface {
+  overflow: hidden;
+  border: 1px solid rgba(229, 229, 229, 0.9);
+  background: var(--card);
+  border-radius: 0;
+  box-shadow: 0 10px 24px rgba(20, 18, 16, 0.04);
+}
+
+.ui-surface-flat {
+  border-radius: 0 !important;
+}
+
+.ui-rounded {
+  border-radius: var(--radius-lg) !important;
 }
 
 .pop-in {
@@ -96,18 +110,27 @@ body {
 .petal {
   position: absolute;
   top: -10vh;
-  border-radius: 50% 50% 50% 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, #f7d7c7 60%, #e7b8a4);
-  opacity: 0.85;
+  border-radius: 999px;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.7));
+  opacity: 0;
+  filter: blur(0.6px);
   animation: petal-fall linear infinite;
 }
 
 @keyframes petal-fall {
   0% {
-    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+    transform: translate3d(0, -12vh, 0) scale(0.9);
+  }
+  15% {
+    opacity: 0.9;
+  }
+  75% {
+    opacity: 0.55;
   }
   100% {
-    transform: translate3d(40px, 110vh, 0) rotate(160deg);
+    opacity: 0;
+    transform: translate3d(16px, 112vh, 0) scale(1);
   }
 }
 

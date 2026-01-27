@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
@@ -23,10 +23,19 @@ const getCountdown = (): Countdown => {
   return { days, hours, minutes, seconds };
 };
 
+const INITIAL_COUNTDOWN: Countdown = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+};
+
 export default function DateLocationSection() {
-  const [countdown, setCountdown] = useState<Countdown>(getCountdown());
+  const [countdown, setCountdown] = useState<Countdown>(INITIAL_COUNTDOWN);
 
   useEffect(() => {
+    setCountdown(getCountdown());
+
     const interval = setInterval(() => {
       setCountdown(getCountdown());
     }, 1000);
@@ -41,6 +50,7 @@ export default function DateLocationSection() {
       </Reveal>
       <Reveal className="mt-3 text-2xl">2026.10.24</Reveal>
       <Reveal className="mt-1 text-sm text-neutral-500">토요일 오후 2시</Reveal>
+
       <Reveal className="mt-6 grid grid-cols-4 gap-2 text-sm">
         {[
           { label: "DAYS", value: countdown.days },
@@ -48,19 +58,15 @@ export default function DateLocationSection() {
           { label: "MIN", value: countdown.minutes },
           { label: "SEC", value: countdown.seconds },
         ].map((item) => (
-          <div
-            key={item.label}
-            className="rounded-xl border border-neutral-200/70 bg-white py-3"
-          >
-            <p className="text-[10px] tracking-[0.2em] text-neutral-400">
-              {item.label}
-            </p>
+          <div key={item.label} className="ui-rounded border border-neutral-200/70 bg-white py-3">
+            <p className="text-[10px] tracking-[0.2em] text-neutral-400">{item.label}</p>
             <p className="mt-1 text-lg font-semibold text-neutral-700">
               {String(item.value).padStart(2, "0")}
             </p>
           </div>
         ))}
       </Reveal>
+
       <Reveal className="mt-5 text-sm text-neutral-500">
         진호, 나은의 결혼식이 {countdown.days}일 남았습니다.
       </Reveal>

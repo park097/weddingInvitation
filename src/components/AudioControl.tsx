@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 
@@ -54,7 +54,7 @@ export default function AudioControl() {
     <button
       type="button"
       onClick={isPlaying ? stop : start}
-      className="fixed right-4 top-4 z-50 rounded-full border border-white/60 bg-white/80 px-4 py-2 text-xs font-medium text-neutral-700 shadow-md backdrop-blur"
+      className="ui-rounded fixed right-4 top-4 z-50 border border-white/60 bg-white/80 px-4 py-2 text-xs font-medium text-neutral-700 shadow-md backdrop-blur"
       aria-pressed={isPlaying}
     >
       {isPlaying ? "음악 끄기" : "배경음악 재생"}
