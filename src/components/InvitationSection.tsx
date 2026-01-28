@@ -131,22 +131,16 @@ export default function InvitationSection({
                         <p className="text-xs text-white/60">{person.phone}</p>
                       </div>
                       <div className="flex shrink-0 gap-2">
-                        <button
-                          type="button"
-                          className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20"
-                          onClick={() => handleCall(person.phone)}
-                          aria-label={`${person.name}에게 전화`}
-                        >
-                          ☏
-                        </button>
-                        <button
-                          type="button"
-                          className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20"
-                          onClick={() => handleSms(person.phone)}
-                          aria-label={`${person.name}에게 문자`}
-                        >
-                          ✉
-                        </button>
+                      <a  href={`tel:${person.phone}`}
+                        className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 inline-flex items-center justify-center"
+                        aria-label={`${person.name}에게 전화`}>
+                        ☎
+                      </a>
+                      <a href={`sms:${person.phone}`}
+                        className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 inline-flex items-center justify-center"
+                        aria-label={`${person.name}에게 문자`}>
+                        ✉
+                      </a>
                       </div>
                     </div>
                   ))}
@@ -164,22 +158,20 @@ export default function InvitationSection({
                         <p className="text-xs text-white/60">{person.phone}</p>
                       </div>
                       <div className="flex shrink-0 gap-2">
-                        <button
-                          type="button"
-                          className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20"
-                          onClick={() => handleCall(person.phone)}
-                          aria-label={`${person.name}에게 전화`}
-                        >
-                          ☎
-                        </button>
-                        <button
-                          type="button"
-                          className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20"
-                          onClick={() => handleSms(person.phone)}
-                          aria-label={`${person.name}에게 문자`}
-                        >
-                          ✉
-                        </button>
+                      <a
+                        href={`tel:${person.phone}`}
+                        className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 inline-flex items-center justify-center"
+                        aria-label={`${person.name}에게 전화`}
+                      >
+                        ☎
+                      </a>
+                      <a
+                        href={`sms:${person.phone}`}
+                        className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 inline-flex items-center justify-center"
+                        aria-label={`${person.name}에게 문자`}
+                      >
+                        ✉
+                      </a>
                       </div>
                     </div>
                   ))}
