@@ -9,7 +9,7 @@
   --radius-lg: 18px;
   --font-sans: var(--font-pretendard);
   --font-serif: var(--font-pretendard);
-  --font-display: var(--font-pretendard);
+  --font-display: var(--font-maruburi);
 }
 
 @theme inline {
@@ -17,7 +17,7 @@
   --color-foreground: var(--ink);
   --font-sans: var(--font-pretendard);
   --font-serif: var(--font-pretendard);
-  --font-display: var(--font-pretendard);
+  --font-display: var(--font-maruburi);
 }
 
 * {
@@ -34,7 +34,7 @@ body {
   color: var(--ink);
   --font-sans: var(--font-pretendard);
   --font-serif: var(--font-pretendard);
-  --font-display: var(--font-pretendard);
+  --font-display: var(--font-maruburi);
   font-family: var(--font-pretendard);
   letter-spacing: -0.01em;
 }
@@ -78,7 +78,7 @@ body {
 }
 
 .ui-rounded {
-  border-radius: var(--radius-lg) !important;
+  border-radius: var(--radius-sm) !important;
 }
 
 .pop-in {
@@ -110,27 +110,41 @@ body {
 .petal {
   position: absolute;
   top: -10vh;
-  border-radius: 999px;
-  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.7));
+  border-radius: 999px 999px 999px 0;
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(252, 249, 244, 0.98),
+    rgba(245, 237, 229, 0.88),
+    rgba(232, 219, 205, 0.72)
+  );
   opacity: 0;
-  filter: blur(0.6px);
+  filter: blur(0.4px);
   animation: petal-fall linear infinite;
 }
 
 @keyframes petal-fall {
   0% {
     opacity: 0;
-    transform: translate3d(0, -12vh, 0) scale(0.9);
+    transform: translate3d(0, -12vh, 0) scale(0.85) rotate(0deg);
   }
   15% {
-    opacity: 0.9;
+    opacity: 0.95;
   }
   75% {
-    opacity: 0.55;
+    opacity: 0.6;
   }
   100% {
     opacity: 0;
-    transform: translate3d(16px, 112vh, 0) scale(1);
+    transform: translate3d(18px, 112vh, 0) scale(1.05) rotate(40deg);
+  }
+}
+
+@keyframes wave-shift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 

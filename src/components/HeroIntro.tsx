@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -11,19 +11,6 @@ export default function HeroIntro() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  // Smaller, round white particles.
-  const petals = [
-    { left: "6%", size: 6, delay: "0s", duration: "9s" },
-    { left: "16%", size: 5, delay: "1.2s", duration: "8s" },
-    { left: "26%", size: 7, delay: "2.1s", duration: "10s" },
-    { left: "36%", size: 6, delay: "0.8s", duration: "9s" },
-    { left: "46%", size: 5, delay: "1.7s", duration: "8s" },
-    { left: "56%", size: 7, delay: "2.6s", duration: "11s" },
-    { left: "66%", size: 6, delay: "1.4s", duration: "9s" },
-    { left: "76%", size: 5, delay: "2.9s", duration: "10s" },
-    { left: "86%", size: 7, delay: "0.6s", duration: "9s" },
-  ];
-
   const introVisibilityClass = isIntroVisible
     ? "opacity-100 translate-y-0 scale-100"
     : "opacity-0 translate-y-4 scale-[0.985]";
@@ -32,7 +19,7 @@ export default function HeroIntro() {
     <section className="relative z-10 w-full">
       <div className="relative mx-auto h-[95vh] w-full max-w-[420px] px-4">
         <div
-          className={`relative h-full overflow-hidden ui-rounded transition-all duration-1000 ease-out ${introVisibilityClass}`}
+          className={`relative h-full overflow-hidden bg-[var(--card)] border border-neutral-200/90 border-b-0 transition-all duration-1000 ease-out ${introVisibilityClass}`}
         >
           <div className="absolute inset-0 z-0">
             <Image
@@ -45,7 +32,17 @@ export default function HeroIntro() {
           </div>
 
           <div className="pointer-events-none absolute inset-0 z-10">
-            {petals.map((petal, index) => (
+            {[
+              { left: "6%", size: 6, delay: "0s", duration: "9s" },
+              { left: "16%", size: 5, delay: "1.2s", duration: "8s" },
+              { left: "26%", size: 7, delay: "2.1s", duration: "10s" },
+              { left: "36%", size: 6, delay: "0.8s", duration: "9s" },
+              { left: "46%", size: 5, delay: "1.7s", duration: "8s" },
+              { left: "56%", size: 7, delay: "2.6s", duration: "11s" },
+              { left: "66%", size: 6, delay: "1.4s", duration: "9s" },
+              { left: "76%", size: 5, delay: "2.9s", duration: "10s" },
+              { left: "86%", size: 7, delay: "0.6s", duration: "9s" },
+            ].map((petal, index) => (
               <span
                 key={`${petal.left}-${index}`}
                 className="petal"
@@ -60,14 +57,21 @@ export default function HeroIntro() {
             ))}
           </div>
 
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-end px-6 pb-12 text-center text-white pointer-events-none">
-            <div className="display hero-text text-[68px] font-semibold leading-[0.88]">
-              <div>26</div>
-              <div>10</div>
-              <div>24</div>
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--card)]/90 via-[var(--card)]/20 to-transparent" />
+
+          <div className="absolute inset-x-0 top-0 z-20 bg-[var(--card)] py-6 text-center font-sans">
+            <div className="text-2xl tracking-[0.08em] ">2026 / 04 / 28</div>
+            <div className="mt-1 text-xs tracking-[0.2em] text-[#4a3f38]">SATURDAY</div>
+          </div>
+
+          <div className="absolute inset-x-0 bottom-0 z-20 bg-[var(--card)] py-5 text-center font-sans">
+            <div className="text-lg tracking-[0.2em]">이충기 · 주은화</div>
+            <div className="mt-4 text-l tracking-[0.1em] text-[#4a3f38] opacity-70">
+              2026년 10월 24일 토요일 오후 2시
             </div>
-            <div className="hero-text mt-4 text-xs uppercase tracking-[0.35em] text-white/90">
-              Wedding Invitation
+
+            <div className="mt-0 text-l tracking-[0.1em] text-[#4a3f38] opacity-60">
+              채플웨딩홀 컨벤션, 3층
             </div>
           </div>
         </div>

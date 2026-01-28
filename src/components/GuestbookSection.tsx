@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -63,6 +63,7 @@ export default function GuestbookSection() {
   const [deletePassword, setDeletePassword] = useState("");
   const [formError, setFormError] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -116,6 +117,7 @@ export default function GuestbookSection() {
       });
       resetForm();
       setIsFormOpen(false);
+      setFeedbackMessage("저장되었습니다");
     } catch (error) {
       setFormError("등록에 실패했습니다. 잠시 후 다시 시도해주세요.");
     }
@@ -145,6 +147,7 @@ export default function GuestbookSection() {
       await deleteDoc(ref);
       setDeleteTarget(null);
       setDeletePassword("");
+      setFeedbackMessage("삭제되었습니다");
     } catch (error) {
       setDeleteError("삭제에 실패했습니다. 잠시 후 다시 시도해주세요.");
     }
@@ -152,7 +155,7 @@ export default function GuestbookSection() {
 
   return (
     <SectionCard>
-      <Reveal className="mt-2 text-center serif text-xs tracking-[0.3em] text-neutral-500">
+      <Reveal className="mt-4 text-center serif text-xs tracking-[0.3em] text-neutral-500">
         GUESTBOOK
       </Reveal>
       <Reveal className="mt-2 text-center text-xl text-[#b57b5c]">방명록</Reveal>
@@ -189,10 +192,10 @@ export default function GuestbookSection() {
         </div>
       </Reveal>
 
-      <Reveal className="mt-4 flex justify-end gap-4 text-sm">
+      <Reveal className="mt-4 flex justify-end gap-2 text-sm">
         <button
           type="button"
-          className="h-12 ui-rounded border border-neutral-200 bg-white px-6 font-medium"
+          className="h-11 ui-rounded border border-neutral-200 bg-white px-6 font-medium"
           onClick={() => {
             resetForm();
             setIsFormOpen(true);
@@ -202,7 +205,7 @@ export default function GuestbookSection() {
         </button>
         <button
           type="button"
-          className="h-12 ui-rounded border border-neutral-200 bg-white px-6 font-medium"
+          className="h-11 ui-rounded border border-neutral-200 bg-white px-6 font-medium"
           onClick={() => setIsListOpen(true)}
         >
           전체보기
@@ -337,6 +340,21 @@ export default function GuestbookSection() {
                 삭제
               </button>
             </div>
+          </div>
+        </div>
+      ) : null}
+
+      {feedbackMessage ? (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-6" role="dialog" aria-modal="true">
+          <div className="ui-rounded w-full max-w-[360px] bg-white px-6 py-7 text-center shadow-2xl">
+            <p className="text-sm text-neutral-800">{feedbackMessage}</p>
+            <button
+              type="button"
+              className="ui-rounded mt-5 inline-flex h-10 min-w-[88px] items-center justify-center bg-[#efe3e6] px-4 text-sm font-medium text-neutral-800"
+              onClick={() => setFeedbackMessage(null)}
+            >
+              확인
+            </button>
           </div>
         </div>
       ) : null}

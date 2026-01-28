@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -105,39 +105,37 @@ export default function FlowerSection() {
   }, [isSdkReady, kakaoKey, shareUrl]);
 
   return (
-    <SectionCard className="text-center">
-      <Reveal className="mt-6">
-        <div className="ui-rounded relative overflow-hidden border border-neutral-200/70 bg-white">
-          <div className="relative aspect-[3/4] w-full">
-            <Image
-              src="/flower-photo.svg"
-              alt="Wedding photo"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+    <SectionCard className="p-0">
+      <Reveal className="p-0">
+        <div className="relative -mx-6 h-[88vh] w-[calc(100%+3rem)] overflow-hidden">
+          <Image
+            src="/flower-photo.svg"
+            alt="Wedding photo"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/85 via-white/35 to-transparent" />
 
-            <div className="absolute bottom-24 left-5 right-5 text-left text-sm font-medium text-white drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]">
-              함께하려다, 세상이 다 겨울이어도
-              <br />
-              우리 사랑은 봄처럼 따뜻하고
-              <br />
-              간혹, 먹구름 뜰겨도 견딥니다.
-              <br />
-              이수동, 사랑가
-            </div>
-
-            <button
-              type="button"
-              onClick={handleKakaoShare}
-              className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2 text-sm font-medium text-[#3a332f] underline underline-offset-4"
-            >
-              <span className="ui-rounded inline-flex h-6 w-6 items-center justify-center bg-[#FEE500] text-[11px] font-bold text-black">
-                K
-              </span>
-              카카오톡으로 초대장 보내기
-            </button>
+          <div className="absolute bottom-28 left-6 right-6 text-left text-sm font-medium text-white drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]">
+            함께하려다, 세상이 다 겨울이어도
+            <br />
+            우리 사랑은 봄처럼 따뜻하고
+            <br />
+            간혹, 먹구름 뜰겨도 견딥니다.
+            <br />
+            이수동, 사랑가
           </div>
+
+          <button
+            type="button"
+            onClick={handleKakaoShare}
+            className="absolute bottom-10 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap text-sm font-medium text-[#3a332f] no-underline"
+          >
+            <span className="ui-rounded inline-flex h-6 w-6 items-center justify-center bg-[#FEE500] text-[11px] font-bold text-black">
+              K
+            </span>
+            카카오톡으로 초대장 보내기
+          </button>
         </div>
       </Reveal>
     </SectionCard>

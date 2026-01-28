@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -34,6 +34,38 @@ const pretendard = localFont({
   ],
 });
 
+const maruburi = localFont({
+  variable: "--font-maruburi",
+  display: "swap",
+  src: [
+    {
+      path: "../../public/fonts/MaruBuri-ExtraLight.ttf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/MaruBuri-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+});
+
 export const metadata: Metadata = {
   title: "Wedding Invitation",
   description: "A single-page wedding invitation.",
@@ -46,7 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} antialiased`}>
+      <body className={`${pretendard.variable} ${maruburi.variable} antialiased`}>
         {children}
       </body>
     </html>

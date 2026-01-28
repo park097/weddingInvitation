@@ -46,7 +46,7 @@ export default function AccountSection() {
   };
 
   return (
-    <SectionCard className="text-center">
+    <SectionCard className="text-center mt-4">
       <Reveal className="serif text-xs tracking-[0.3em] text-neutral-500">
         ACCOUNT
       </Reveal>

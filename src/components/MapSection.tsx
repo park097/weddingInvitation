@@ -12,11 +12,11 @@ const Dot = ({ color }: { color: string }) => (
 
 export default function MapSection() {
   return (
-    <SectionCard className="text-center">
+    <SectionCard className="text-center mt-2">
       <Reveal className="serif text-sm tracking-[0.3em] text-neutral-500">
         LOCATION
       </Reveal>
-      <Reveal className="mt-3 text-lg font-medium text-neutral-800">
+      <Reveal className="mt-2 text-center text-xl text-[#b57b5c]">
         채플웨딩홀 컨벤션, 3층
       </Reveal>
       <Reveal className="mt-1 text-sm text-neutral-500">

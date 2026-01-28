@@ -50,11 +50,11 @@ export default function GallerySection() {
   }, [galleryImages.length]);
 
   return (
-    <SectionCard className="text-center">
+    <SectionCard className="text-center mt-2">
       <Reveal className="serif text-xs tracking-[0.3em] text-neutral-500">
         GALLERY
       </Reveal>
-      <Reveal className="mt-2 text-xl text-neutral-800">웨딩 갤러리</Reveal>
+      <Reveal className="mt-2 text-xl text-[#b57b5c]">웨딩 갤러리</Reveal>
 
       <Reveal className="mt-6">
         <div className="relative -mx-6">
