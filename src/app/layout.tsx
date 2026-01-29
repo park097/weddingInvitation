@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -34,8 +34,8 @@ const pretendard = localFont({
   ],
 });
 
-const maruburi = localFont({
-  variable: "--font-maruburi",
+const maruBuri = localFont({
+  variable: "--font-maru-buri",
   display: "swap",
   src: [
     {
@@ -78,7 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} ${maruburi.variable} antialiased`}>
+      <body className={`${pretendard.variable} ${maruBuri.variable} antialiased`}>
         {children}
       </body>
     </html>

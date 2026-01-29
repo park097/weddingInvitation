@@ -1,52 +1,42 @@
 ﻿"use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const AUDIO_SRC = "/audio/MP_Dream.mp3";
 
 export default function AudioControl() {
-  const contextRef = useRef<AudioContext | null>(null);
-  const oscillatorsRef = useRef<OscillatorNode[]>([]);
-  const gainRef = useRef<GainNode | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  useEffect(() => {
+    const audio = new Audio(AUDIO_SRC);
+    audio.loop = true;
+    audio.preload = "auto";
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audioRef.current = null;
+    };
+  }, []);
+
   const start = async () => {
-    if (!contextRef.current) {
-      const context = new AudioContext();
-      const gain = context.createGain();
-      gain.gain.value = 0.03;
-      gain.connect(context.destination);
-
-      const osc1 = context.createOscillator();
-      const osc2 = context.createOscillator();
-      osc1.type = "sine";
-      osc2.type = "triangle";
-      osc1.frequency.value = 220;
-      osc2.frequency.value = 330;
-      osc1.connect(gain);
-      osc2.connect(gain);
-      osc1.start();
-      osc2.start();
-
-      contextRef.current = context;
-      oscillatorsRef.current = [osc1, osc2];
-      gainRef.current = gain;
+    const audio = audioRef.current;
+    if (!audio) return;
+    try {
+      await audio.play();
+      setIsPlaying(true);
+    } catch (error) {
+      // Autoplay can be blocked; user interaction required.
+      setIsPlaying(false);
     }
-
-    if (contextRef.current?.state === "suspended") {
-      await contextRef.current.resume();
-    }
-
-    setIsPlaying(true);
   };
 
-  const stop = async () => {
-    if (contextRef.current) {
-      oscillatorsRef.current.forEach((osc) => osc.stop());
-      oscillatorsRef.current = [];
-      await contextRef.current.close();
-      contextRef.current = null;
-      gainRef.current = null;
-    }
-
+  const stop = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.pause();
+    audio.currentTime = 0;
     setIsPlaying(false);
   };
 

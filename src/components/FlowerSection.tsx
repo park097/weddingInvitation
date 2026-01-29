@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -109,14 +109,12 @@ export default function FlowerSection() {
       <Reveal className="p-0">
         <div className="relative -mx-6 h-[88vh] w-[calc(100%+3rem)] overflow-hidden">
           <Image
-            src="/flower-photo.svg"
+       src="/img/img6.jpg"
             alt="Wedding photo"
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/85 via-white/35 to-transparent" />
-
-          <div className="absolute bottom-28 left-6 right-6 text-left text-sm font-medium text-white drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]">
+          <div className="absolute bottom-100 left-6 right-6 text-left text-sm font-medium text-white drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]">
             함께하려다, 세상이 다 겨울이어도
             <br />
             우리 사랑은 봄처럼 따뜻하고
@@ -131,9 +129,7 @@ export default function FlowerSection() {
             onClick={handleKakaoShare}
             className="absolute bottom-10 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap text-sm font-medium text-[#3a332f] no-underline"
           >
-            <span className="ui-rounded inline-flex h-6 w-6 items-center justify-center bg-[#FEE500] text-[11px] font-bold text-black">
-              K
-            </span>
+<          Image src="/icon/kakaotalk_btn.png" alt="카카오톡" width={22} height={22} />
             카카오톡으로 초대장 보내기
           </button>
         </div>

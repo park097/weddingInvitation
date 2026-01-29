@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useState } from "react";
@@ -27,50 +27,37 @@ type InvitationSectionProps = {
   withDivider?: boolean;
 };
 
+const PhoneIcon = () => (
+  <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1 .33 2.1.5 3.2.5a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.8 21 3 13.2 3 3a1 1 0 0 1 1-1h3.55a1 1 0 0 1 1 1c0 1.1.17 2.2.5 3.2a1 1 0 0 1-.25 1z"
+    />
+  </svg>
+);
+
+
 export default function InvitationSection({
   withDivider = true,
 }: InvitationSectionProps) {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
-  const handleCall = (phone: string) => {
-    window.location.href = `tel:${phone}`;
-  };
-
-  const handleSms = (phone: string) => {
-    window.location.href = `sms:${phone}`;
-  };
-
   return (
     <section className="pt-10">
       <SectionCard className="text-center">
-        <Reveal initialVisible className="text-xs tracking-[0.3em] text-neutral-500">
+        <Reveal className="text-xs tracking-[0.3em] text-neutral-500">
           INVITATION
         </Reveal>
-        <Reveal initialVisible className="mt-2 text-xl font-semibold text-[#b57b5c]">
+        <Reveal className="mt-2 text-xl font-semibold text-[#b57b5c]">
           소중한 분들을 초대합니다
         </Reveal>
 
-        <Reveal
-          initialVisible
-          className="mt-6 text-sm leading-7 text-neutral-600"
-        >
-          저희 두 사람의 작은 만남이
+        <Reveal className="mt-6 text-sm leading-7 text-neutral-600">
+          함께한 모든 순간이 감사했고
           <br />
-          사랑의 결실을 이루어
+          이제 두 사람이 한 길을 걸어가려 합니다.
           <br />
-          소중한 결혼식을 올리게 되었습니다.
-          <br />
-          <br />
-          평생 서로 귀하게 여기며
-          <br />
-          첫 마음 그대로 존중하고 배려하며 살겠습니다.
-          <br />
-          <br />
-          오로지 믿음과 사랑을 약속하는 날
-          <br />
-          오셔서 축복해 주시면 더없는 기쁨으로
-          <br />
-          간직하겠습니다.
+          따뜻한 마음으로 축복해 주세요.
         </Reveal>
 
         <Reveal className="mt-8">
@@ -85,29 +72,26 @@ export default function InvitationSection({
           </div>
         </Reveal>
 
-        <Reveal
-          initialVisible
-          className="mt-6 text-sm leading-7 text-neutral-600"
-        >
-          김건호 · 김어머니의 아들 김진호
+        <Reveal className="mt-6 text-sm leading-7 text-neutral-600">
+          김건호 · 김어머니의 장남
           <br />
-          이주모 · 이수진의 딸 이나연
+          이주모 · 이수진의 장녀
         </Reveal>
 
-        <Reveal initialVisible className="mt-3">
+        <Reveal className="mt-3">
           <button
             type="button"
-            className="ui-rounded h-12 w-40 border border-neutral-200 bg-white px-6 font-medium"
+            className="ui-rounded inline-flex h-12 w-40 items-center justify-center gap-2 border border-neutral-200 bg-white px-6 font-medium"
             onClick={() => setIsContactOpen(true)}
-            >
-            <span className="mr-2 text-black" aria-hidden="true">☏</span>
+          >
+            <PhoneIcon />
             연락하기
           </button>
         </Reveal>
 
         {isContactOpen ? (
           <div className="fixed inset-0 z-50 bg-black/50 px-4 py-10" role="dialog" aria-modal="true">
-            <div className="ui-rounded relative mx-auto w-full max-w-[420px] bg-[#5b4f51] p-6 text-white shadow-xl">
+            <div className="ui-rounded relative mx-auto w-full max-w-[420px] translate-y-230 bg-[#5b4f51] p-6 text-white shadow-xl">
               <button
                 type="button"
                 className="absolute right-4 top-4 text-lg text-white/70"
@@ -134,7 +118,7 @@ export default function InvitationSection({
                       <a  href={`tel:${person.phone}`}
                         className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 inline-flex items-center justify-center"
                         aria-label={`${person.name}에게 전화`}>
-                        ☎
+                      <PhoneIcon />
                       </a>
                       <a href={`sms:${person.phone}`}
                         className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 inline-flex items-center justify-center"
@@ -163,7 +147,7 @@ export default function InvitationSection({
                         className="ui-rounded bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20 inline-flex items-center justify-center"
                         aria-label={`${person.name}에게 전화`}
                       >
-                        ☎
+                      <PhoneIcon />
                       </a>
                       <a
                         href={`sms:${person.phone}`}

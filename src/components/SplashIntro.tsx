@@ -1,100 +1,134 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-type Phase = 1 | 2 | 3;
+const IMAGE_1 = "/img/img5.jpg";
+const IMAGE_2 = "/img/img2.jpg";
 
 export default function SplashIntro() {
-  const [phase, setPhase] = useState<Phase>(1);
   const [isVisible, setIsVisible] = useState(true);
+  const [phase, setPhase] = useState<1 | 2>(1);
+  const [typedCount, setTypedCount] = useState(0);
+  const hasCompletedRef = useRef(false);
+
+  const text1 = "우리의 가장 빛나는 날";
+  const text2 = "소중한 분들을 초대합니다";
+
+  const typedText = useMemo(() => text2.slice(0, typedCount), [text2, typedCount]);
 
   useEffect(() => {
+    if (!isVisible) return;
+
     // Lock scroll while the splash is visible.
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const phase2Timer = window.setTimeout(() => setPhase(2), 900);
-    const phase3Timer = window.setTimeout(() => setPhase(3), 1900);
-    const hideTimer = window.setTimeout(() => {
-      setIsVisible(false);
+    const switchTimer = window.setTimeout(() => setPhase(2), 2000);
+    const endTimer = window.setTimeout(() => {
+      endSplash();
       document.body.style.overflow = previousOverflow;
-    }, 2700);
+    }, 4600);
 
     return () => {
-      window.clearTimeout(phase2Timer);
-      window.clearTimeout(phase3Timer);
-      window.clearTimeout(hideTimer);
+      window.clearTimeout(switchTimer);
+      window.clearTimeout(endTimer);
       document.body.style.overflow = previousOverflow;
     };
-  }, []);
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible || phase !== 2) return;
+
+    setTypedCount(0);
+    let current = 0;
+    const interval = window.setInterval(() => {
+      current += 1;
+      setTypedCount(current);
+      if (current >= text2.length) {
+        window.clearInterval(interval);
+      }
+    }, 100);
+
+    return () => window.clearInterval(interval);
+  }, [isVisible, phase, text2.length]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const handleInteract = () => endSplash();
+    window.addEventListener("scroll", handleInteract, { passive: true });
+    window.addEventListener("touchstart", handleInteract, { passive: true });
+    window.addEventListener("click", handleInteract);
+
+    return () => {
+      window.removeEventListener("scroll", handleInteract);
+      window.removeEventListener("touchstart", handleInteract);
+      window.removeEventListener("click", handleInteract);
+    };
+  }, [isVisible]);
+
+  const endSplash = () => {
+    if (hasCompletedRef.current) return;
+    hasCompletedRef.current = true;
+    setIsVisible(false);
+    window.dispatchEvent(new Event("splash-ended"));
+  };
 
   if (!isVisible) return null;
 
-  const containerClass =
-    phase === 3 ? "opacity-0 scale-[1.02]" : "opacity-100 scale-100";
-
-  const phase1TextClass =
-    phase === 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2";
-  const phase2TextClass =
-    phase === 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2";
-  const bottomTextClass = phase === 3 ? "opacity-0" : "opacity-100";
-
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#f7f2ee]">
-      <div
-        className={`relative h-full w-full max-w-[460px] overflow-hidden transition-all duration-700 ease-out ${containerClass}`}
-      >
+    <div className="fixed inset-0 z-[100] bg-[#F5F5F3]">
+      <div className="relative mx-auto h-full w-full max-w-[480px]">
         <div
-          className={`absolute inset-0 transition-all duration-1000 ease-out ${
-            phase === 1 ? "opacity-100 scale-100" : "opacity-0 scale-105"
+          className={`absolute inset-0 transition-opacity duration-600 ${
+            phase === 1 ? "opacity-100" : "opacity-0"
           }`}
         >
           <Image
-            src="/img/img1.jpg"
-            alt="Intro photo 1"
+            src={IMAGE_1}
+            alt="Splash image 1"
             fill
             priority
+            unoptimized
             className="object-cover"
           />
+          <div className="absolute inset-0 flex items-center justify-center text-center">
+            <div className="px-6">
+              <p
+                className="text-[22px] font-medium text-[#FBF8F2] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-pop"
+                style={{ fontFamily: "var(--font-maru-buri)" }}
+              >
+                {text1}
+              </p>
+            </div>
+          </div>
         </div>
         <div
-          className={`absolute inset-0 transition-all duration-1000 ease-out ${
-            phase === 2 ? "opacity-100 scale-100" : "opacity-0 scale-105"
+          className={`absolute inset-0 transition-opacity duration-600 ${
+            phase === 2 ? "opacity-100" : "opacity-0"
           }`}
         >
           <Image
-            src="/img/img2.jpg"
-            alt="Intro photo 2"
+            src={IMAGE_2}
+            alt="Splash image 2"
             fill
             priority
+            unoptimized
             className="object-cover"
           />
+          <div className="absolute inset-0 flex items-center justify-center text-center">
+            <div className="px-6">
+              <p
+                className="text-[22px] font-medium text-[#FBF8F2] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)]"
+                style={{ fontFamily: "var(--font-maru-buri)" }}
+              >
+                {typedText}
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f7f2ee] via-transparent to-transparent" />
 
-        <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-end px-6 pb-12 text-center text-white">
-          <div className="relative w-full min-h-[120px]">
-            <div
-              className={`absolute inset-0 flex items-end justify-center transition-all duration-700 ease-out ${phase1TextClass}`}
-            >
-              <div className="display text-[56px] font-semibold leading-[0.92] tracking-[0.02em] hero-text">
-                <div>LOVE OF</div>
-                <div>LIFE</div>
-              </div>
-            </div>
-            <div
-              className={`absolute inset-0 flex items-end justify-center transition-all duration-700 ease-out ${phase2TextClass}`}
-            >
-              <div className="display text-[40px] font-semibold leading-[1] tracking-[0.08em] hero-text">
-                EUNHWA & CHUNGKI
-              </div>
-            </div>
-          </div>
-          <div className={`hero-text display mt-4 text-xs uppercase tracking-[0.35em] text-white/90 transition-opacity duration-700 ${bottomTextClass}`}>
-            Wedding Invitation
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ export default function HeroIntro() {
     <section className="relative z-10 w-full">
       <div className="relative mx-auto h-[95vh] w-full max-w-[420px] px-4">
         <div
-          className={`relative h-full overflow-hidden bg-[var(--card)] border border-neutral-200/90 border-b-0 transition-all duration-1000 ease-out ${introVisibilityClass}`}
+          className={`relative h-full overflow-hidden bg-[var(--card)] transition-all duration-1000 ease-out ${introVisibilityClass}`}
         >
           <div className="absolute inset-0 z-0">
             <Image
@@ -57,10 +57,9 @@ export default function HeroIntro() {
             ))}
           </div>
 
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--card)]/90 via-[var(--card)]/20 to-transparent" />
 
           <div className="absolute inset-x-0 top-0 z-20 bg-[var(--card)] py-6 text-center font-sans">
-            <div className="text-2xl tracking-[0.08em] ">2026 / 04 / 28</div>
+            <div className="text-2xl text-[#b57b5c]tracking-[0.08em] ">2026 / 04 / 28</div>
             <div className="mt-1 text-xs tracking-[0.2em] text-[#4a3f38]">SATURDAY</div>
           </div>
 

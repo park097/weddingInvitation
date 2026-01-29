@@ -67,7 +67,7 @@ export default function AccountSection() {
             >
               <button
                 type="button"
-                className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium"
+                className="flex w-full items-center justify-between bg-neutral-100 px-4 py-3 text-sm font-medium text-neutral-700"
                 onClick={() => setOpenPanel(isOpen ? null : panel.id)}
                 aria-expanded={isOpen}
               >
@@ -125,4 +125,3 @@ export default function AccountSection() {
     </SectionCard>
   );
 }
-
