@@ -6,12 +6,12 @@ import Reveal from "@/components/Reveal";
 import SectionCard from "@/components/SectionCard";
 
 const baseImages = [
-  { src: "/gallery-1.svg", alt: "Wedding portrait 1" },
-  { src: "/gallery-2.svg", alt: "Wedding portrait 2" },
-  { src: "/gallery-3.svg", alt: "Wedding portrait 3" },
-  { src: "/gallery-4.svg", alt: "Wedding portrait 4" },
-  { src: "/gallery-5.svg", alt: "Wedding portrait 5" },
-  { src: "/gallery-6.svg", alt: "Wedding portrait 6" },
+  { src: "/img/img1.jpg", alt: "Wedding portrait 1" },
+  { src: "/img/img2.jpg", alt: "Wedding portrait 2" },
+  { src: "/img/img3.jpg", alt: "Wedding portrait 3" },
+  { src: "/img/img4.jpg", alt: "Wedding portrait 4" },
+  { src: "/img/img5.jpg" ,alt: "Wedding portrait 5" },
+  { src: "/img/img6.jpg", alt: "Wedding portrait 6" },
 ];
 
 export default function GallerySection() {

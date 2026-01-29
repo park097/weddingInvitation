@@ -76,7 +76,7 @@ export default function InvitationSection({
         <Reveal className="mt-8">
           <div className="ui-rounded relative mx-auto w-full max-w-[320px] overflow-hidden">
             <Image
-              src="/gallery-1.svg"
+              src="/img/img4.jpg"
               alt="Wedding portrait"
               width={640}
               height={300}

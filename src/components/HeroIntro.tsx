@@ -23,7 +23,7 @@ export default function HeroIntro() {
         >
           <div className="absolute inset-0 z-0">
             <Image
-              src="/hero-1.svg"
+              src="/img/img3.jpg"
               alt="Wedding portrait"
               fill
               priority

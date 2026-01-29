@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -51,7 +51,7 @@ export default function SplashIntro() {
           }`}
         >
           <Image
-            src="/hero-1.svg"
+            src="/img/img1.jpg"
             alt="Intro photo 1"
             fill
             priority
@@ -64,7 +64,7 @@ export default function SplashIntro() {
           }`}
         >
           <Image
-            src="/flower-photo.svg"
+            src="/img/img2.jpg"
             alt="Intro photo 2"
             fill
             priority
