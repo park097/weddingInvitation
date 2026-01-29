@@ -12,15 +12,15 @@ type Contact = {
 };
 
 const groomContacts: Contact[] = [
-  { label: "신랑", name: "김진호", phone: "010-1234-5678" },
-  { label: "신랑 아버지", name: "김건호", phone: "010-2222-1111" },
-  { label: "신랑 어머니", name: "김어머니", phone: "010-3333-4444" },
+  { label: "신랑", name: "이충기", phone: "010-1234-5678" },
+  { label: "신랑 아버지", name: "이건호", phone: "010-2222-1111" },
+  { label: "신랑 어머니", name: "이어머니", phone: "010-3333-4444" },
 ];
 
 const brideContacts: Contact[] = [
-  { label: "신부", name: "이나연", phone: "010-5555-6666" },
-  { label: "신부 아버지", name: "이주모", phone: "010-7777-8888" },
-  { label: "신부 어머니", name: "이수진", phone: "010-9999-0000" },
+  { label: "신부", name: "주은화", phone: "010-5555-6666" },
+  { label: "신부 아버지", name: "주주모", phone: "010-7777-8888" },
+  { label: "신부 어머니", name: "주수진", phone: "010-9999-0000" },
 ];
 
 type InvitationSectionProps = {

@@ -11,13 +11,13 @@ type Account = {
 };
 
 const groomAccounts: Account[] = [
-  { name: "김진호", bank: "신한은행", number: "110-000-00000" },
+  { name: "이충기", bank: "신한은행", number: "110-000-00000" },
   { name: "김건호", bank: "우리은행", number: "110-000-00000" },
   { name: "김아버지", bank: "국민은행", number: "110-000-00000" },
 ];
 
 const brideAccounts: Account[] = [
-  { name: "이나연", bank: "신한은행", number: "110-000-00000" },
+  { name: "주은화", bank: "신한은행", number: "110-000-00000" },
   { name: "이주모", bank: "우리은행", number: "110-000-00000" },
   { name: "이수진", bank: "국민은행", number: "110-000-00000" },
 ];

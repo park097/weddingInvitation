@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const IMAGE_1 = "/img/img5.jpg";
+const IMAGE_1 = "/img/img1.jpg";
 const IMAGE_2 = "/img/img2.jpg";
 
 export default function SplashIntro() {
@@ -20,15 +20,14 @@ export default function SplashIntro() {
   useEffect(() => {
     if (!isVisible) return;
 
-    // Lock scroll while the splash is visible.
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const switchTimer = window.setTimeout(() => setPhase(2), 2000);
+    const switchTimer = window.setTimeout(() => setPhase(2), 2200);
     const endTimer = window.setTimeout(() => {
       endSplash();
       document.body.style.overflow = previousOverflow;
-    }, 4600);
+    }, 5200);
 
     return () => {
       window.clearTimeout(switchTimer);
@@ -48,7 +47,7 @@ export default function SplashIntro() {
       if (current >= text2.length) {
         window.clearInterval(interval);
       }
-    }, 100);
+    }, 120);
 
     return () => window.clearInterval(interval);
   }, [isVisible, phase, text2.length]);
@@ -79,7 +78,7 @@ export default function SplashIntro() {
 
   return (
     <div className="fixed inset-0 z-[100] bg-[#F5F5F3]">
-      <div className="relative mx-auto h-full w-full max-w-[480px]">
+      <div className="relative mx-auto h-full w-full max-w-[320px]">
         <div
           className={`absolute inset-0 transition-opacity duration-600 ${
             phase === 1 ? "opacity-100" : "opacity-0"
@@ -91,12 +90,12 @@ export default function SplashIntro() {
             fill
             priority
             unoptimized
-            className="object-cover"
+            className="object-cover splash-photo-1"
           />
           <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className="px-6">
               <p
-                className="text-[22px] font-medium text-[#FBF8F2] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-pop"
+                className="text-[20px] font-medium text-[#F7F2E8] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-delayed"
                 style={{ fontFamily: "var(--font-maru-buri)" }}
               >
                 {text1}
@@ -120,7 +119,7 @@ export default function SplashIntro() {
           <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className="px-6">
               <p
-                className="text-[22px] font-medium text-[#FBF8F2] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)]"
+                className="text-[20px] font-medium text-[#F7F2E8] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-soft"
                 style={{ fontFamily: "var(--font-maru-buri)" }}
               >
                 {typedText}

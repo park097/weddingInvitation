@@ -11,7 +11,7 @@ type Countdown = {
   seconds: number;
 };
 
-const targetDate = new Date("2026-10-24T14:00:00+09:00");
+const targetDate = new Date("2026-04-26T12:30:00+09:00");
 
 const getCountdown = (): Countdown => {
   const diff = Math.max(0, targetDate.getTime() - Date.now());
@@ -31,7 +31,7 @@ const INITIAL_COUNTDOWN: Countdown = {
 };
 
 const CALENDAR_YEAR = 2026;
-const CALENDAR_MONTH_INDEX = 9; // October
+const CALENDAR_MONTH_INDEX = 3; 
 
 export default function DateLocationSection() {
   const [countdown, setCountdown] = useState<Countdown>(INITIAL_COUNTDOWN);
@@ -65,8 +65,8 @@ export default function DateLocationSection() {
 
   return (
     <SectionCard className="text-center mt-3">
-      <Reveal className="text-2xl font-semibold text-neutral-700">2026.10.24</Reveal>
-      <Reveal className="mt-1 text-sm text-neutral-500">토요일 오후 2시</Reveal>
+      <Reveal className="text-2xl font-semibold text-neutral-700">2026.04.26</Reveal>
+      <Reveal className="mt-1 text-sm text-neutral-500">일요일 오후 12시30분</Reveal>
 
       <Reveal className="mt-6">
         <div className="mx-auto h-px w-full max-w-[280px] bg-neutral-200/70" />
@@ -81,7 +81,7 @@ export default function DateLocationSection() {
           ))}
           {calendarCells.map((day, index) => {
             if (!day) return <div key={`empty-${index}`} />;
-            const isTarget = day === 24;
+            const isTarget = day === 26;
             return (
               <div
                 key={day}
@@ -117,7 +117,7 @@ export default function DateLocationSection() {
       </Reveal>
 
       <Reveal className="mt-4 text-sm text-neutral-500">
-        나은, 진호의 결혼식이 {countdown.days}일 남았습니다.
+        충기, 은화의 결혼식이 {countdown.days}일 남았습니다.
       </Reveal>
     </SectionCard>
   );

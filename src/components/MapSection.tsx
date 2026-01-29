@@ -11,7 +11,8 @@ const Dot = ({ color }: { color: string }) => (
 );
 
 export default function MapSection() {
-  const venueAddress = "서울 강남구 테헤란로 757";
+  const venueName = "마렌지9";
+  const venueAddress = "서울 중구 을지로 264 9층 9001호";
   const kakaoMapUrl = `https://map.kakao.com/link/search/${encodeURIComponent(venueAddress)}`;
   const naverMapUrl = `https://map.naver.com/v5/search/${encodeURIComponent(venueAddress)}`;
   const tmapUrl = `https://apis.openapi.sk.com/tmap/app/search?name=${encodeURIComponent(venueAddress)}`;
@@ -21,13 +22,12 @@ export default function MapSection() {
       <Reveal className="serif text-sm tracking-[0.3em] text-neutral-500">
         LOCATION
       </Reveal>
-      <Reveal className="mt-3 text-lg font-medium text-neutral-800">
-        채플웨딩홀 컨벤션, 3층
+      <Reveal className="mt-3 text-xl font-medium text-[#b57b5c]">
+        {venueName}
       </Reveal>
       <Reveal className="mt-1 text-sm text-neutral-500">
         {venueAddress}
       </Reveal>
-      <Reveal className="mt-2 text-sm text-neutral-500">Tel. 02-421-1121</Reveal>
 
       <Reveal className="mt-5 ui-rounded overflow-hidden border border-neutral-200/70">
         <Image
@@ -50,9 +50,9 @@ export default function MapSection() {
               href={naverMapUrl}
               target="_blank"
               rel="noreferrer"
-              className="ui-rounded inline-flex h-11 items-center justify-center gap-2 border border-neutral-200 bg-white text-s font-medium text-neutral-700"
+              className="ui-rounded inline-flex h-11 items-center justify-center gap-2 border border-neutral-200 bg-white text-xs font-medium text-neutral-700"
             >
-              <Image src="/icon/naver.png" alt="네이버지도" width={24} height={24} />
+              <Image src="/icon/naver.png" alt="네이버지도" width={22} height={22} />
               네이버지도
             </a>
             {/* <a
@@ -68,10 +68,10 @@ export default function MapSection() {
               href={kakaoMapUrl}
               target="_blank"
               rel="noreferrer"
-              className="ui-rounded inline-flex h-11 items-center justify-center gap-3 border border-neutral-200 bg-white text-s font-medium text-neutral-700"
+              className="ui-rounded inline-flex h-11 items-center justify-center gap-3 border border-neutral-200 bg-white text-xs font-medium text-neutral-700"
             >
               <Image src="/icon/kakaomap.png" alt="카카오내비" width={22} height={22} />
-              카카오내비
+              카카오네비
             </a>
           </div>
         </div>
@@ -80,22 +80,20 @@ export default function MapSection() {
           <p className="font-semibold text-neutral-800">지하철</p>
           <div className="mt-3 space-y-2">
             <p className="flex items-start gap-2">
-              <Dot color="#6b7d3a" />
-              <span>7호선 강남구청역 3-1번 출구</span>
+              <Dot color="#00A84D" />
+              <span>2호선 동대문역사문화공원역 11번 출구에서 91m</span>
             </p>
             <p className="flex items-start gap-2">
-              <Dot color="#d4a11e" />
-              <span>분당선 강남구청역 3-1번 출구</span>
+              <Dot color="#00A5DE" />
+              <span>4호선 동대문역사문화공원역 11,12번 출구</span>
+            </p>
+            <p className="flex items-start gap-2">
+              <Dot color="#8E4EC6" />
+              <span>5호선 동대문역사문화공원역 및 인근 1호선 동대문역</span>
             </p>
           </div>
-          <p className="mt-3 text-xs text-neutral-500">좌측 방향 570m 도보 후 좌측 건물</p>
-        </section>
-
-        <section className="mt-6 border-t border-dashed border-neutral-200 pt-5">
-          <p className="font-semibold text-neutral-800">셔틀버스</p>
-          <p className="mt-3 text-neutral-700">
-            강남구청역 <span className="text-[#6b7d3a]">(7호선)</span>,
-            <span className="text-[#d4a11e]"> (분당선)</span> 3번 출구 앞
+          <p className="mt-3 text-xs text-neutral-500">
+            마린19건물(롯데던던) 지하2층 출입구와 직접 연결
           </p>
         </section>
 
@@ -104,13 +102,22 @@ export default function MapSection() {
           <div className="mt-3 space-y-2">
             <p className="flex items-start gap-2">
               <Dot color="#1f4ba5" />
-              <span>간선버스: 301, 342, 472</span>
+              <span>간선버스: 100, 105, 144, 301, 420</span>
             </p>
             <p className="flex items-start gap-2">
               <Dot color="#2d8a4f" />
-              <span>지선버스: 3011, 4312</span>
+              <span>지선버스: 7212</span>
+            </p>
+            <p className="flex items-start gap-2">
+              <Dot color="#e26b20" />
+              <span>공항버스: 6702</span>
             </p>
           </div>
+        </section>
+
+        <section className="mt-6 border-t border-dashed border-neutral-200 pt-5">
+          <p className="font-semibold text-neutral-800">주차</p>
+          <p className="mt-2 text-neutral-700">600대 이상 주차 가능</p>
         </section>
       </Reveal>
     </SectionCard>

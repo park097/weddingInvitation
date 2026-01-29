@@ -27,6 +27,7 @@ export default function HeroIntro() {
               alt="Wedding portrait"
               fill
               priority
+              unoptimized
               className="object-cover"
             />
           </div>
@@ -57,20 +58,19 @@ export default function HeroIntro() {
             ))}
           </div>
 
-
           <div className="absolute inset-x-0 top-0 z-20 bg-[var(--card)] py-6 text-center font-sans">
-            <div className="text-2xl text-[#b57b5c]tracking-[0.08em] ">2026 / 04 / 28</div>
-            <div className="mt-1 text-xs tracking-[0.2em] text-[#4a3f38]">SATURDAY</div>
+            <div className="text-2xl tracking-[0.08em] ">2026 / 04 / 26</div>
+            <div className="mt-1 text-xs tracking-[0.2em] text-[#4a3f38]">SUNDAY</div>
           </div>
 
           <div className="absolute inset-x-0 bottom-0 z-20 bg-[var(--card)] py-5 text-center font-sans">
             <div className="text-lg tracking-[0.2em]">이충기 · 주은화</div>
             <div className="mt-4 text-l tracking-[0.1em] text-[#4a3f38] opacity-70">
-              2026년 10월 24일 토요일 오후 2시
+              2026년 04월 26일 일요일 오후 12시30분
             </div>
 
             <div className="mt-0 text-l tracking-[0.1em] text-[#4a3f38] opacity-60">
-              채플웨딩홀 컨벤션, 3층
+              마렌지9, 9층
             </div>
           </div>
         </div>
