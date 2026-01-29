@@ -67,8 +67,31 @@ const maruBuri = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Wedding Invitation",
-  description: "A single-page wedding invitation.",
+  title: "이충기 · 주은화 결혼합니다",
+  description: "2026년 04월 26일 일요일 오후 12시30분\n마렌지 9",
+  metadataBase: new URL("https://eunhwa-chunggi-wedding.vercel.app/"),
+  openGraph: {
+    title: "이충기 · 주은화 결혼합니다",
+    description: "2026년 04월 26일 일요일 오후 12시30분\n마렌지 9",
+    url: "https://eunhwa-chunggi-wedding.vercel.app/",
+    siteName: "이충기 · 주은화 결혼합니다",
+    images: [
+      {
+        url: "/img/img5.jpg",
+        width: 1200,
+        height: 630,
+        alt: "이충기 · 주은화 결혼합니다",
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "이충기 · 주은화 결혼합니다",
+    description: "2026년 04월 26일 일요일 오후 12시30분\n마렌지 9",
+    images: ["/img/img5.jpg"],
+  },
 };
 
 export default function RootLayout({

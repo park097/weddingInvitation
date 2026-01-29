@@ -6,10 +6,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 const IMAGE_1 = "/img/img1.jpg";
 const IMAGE_2 = "/img/img2.jpg";
 
+const MAX_WAIT_MS = 7000;
+const PHOTO_1_DURATION_MS = 2000;
+const PHOTO_2_DURATION_MS = 2000;
+
 export default function SplashIntro() {
   const [isVisible, setIsVisible] = useState(true);
   const [phase, setPhase] = useState<1 | 2>(1);
   const [typedCount, setTypedCount] = useState(0);
+  const [img1Ready, setImg1Ready] = useState(false);
+  const [img2Ready, setImg2Ready] = useState(false);
   const hasCompletedRef = useRef(false);
 
   const text1 = "우리의 가장 빛나는 날";
@@ -17,27 +23,39 @@ export default function SplashIntro() {
 
   const typedText = useMemo(() => text2.slice(0, typedCount), [text2, typedCount]);
 
+  // Safety: don't wait forever if the image never loads.
+  useEffect(() => {
+    if (img1Ready) return;
+    const fallback = window.setTimeout(() => setImg1Ready(true), MAX_WAIT_MS);
+    return () => window.clearTimeout(fallback);
+  }, [img1Ready]);
+
+  useEffect(() => {
+    if (img2Ready) return;
+    const fallback = window.setTimeout(() => setImg2Ready(true), MAX_WAIT_MS);
+    return () => window.clearTimeout(fallback);
+  }, [img2Ready]);
+
   useEffect(() => {
     if (!isVisible) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const switchTimer = window.setTimeout(() => setPhase(2), 2200);
-    const endTimer = window.setTimeout(() => {
-      endSplash();
-      document.body.style.overflow = previousOverflow;
-    }, 5200);
-
     return () => {
-      window.clearTimeout(switchTimer);
-      window.clearTimeout(endTimer);
       document.body.style.overflow = previousOverflow;
     };
   }, [isVisible]);
 
   useEffect(() => {
-    if (!isVisible || phase !== 2) return;
+    if (!isVisible || !img1Ready) return;
+
+    const timer = window.setTimeout(() => setPhase(2), PHOTO_1_DURATION_MS);
+    return () => window.clearTimeout(timer);
+  }, [isVisible, img1Ready]);
+
+  useEffect(() => {
+    if (!isVisible || phase !== 2 || !img2Ready) return;
 
     setTypedCount(0);
     let current = 0;
@@ -49,8 +67,15 @@ export default function SplashIntro() {
       }
     }, 120);
 
-    return () => window.clearInterval(interval);
-  }, [isVisible, phase, text2.length]);
+    const endTimer = window.setTimeout(() => {
+      endSplash();
+    }, PHOTO_2_DURATION_MS);
+
+    return () => {
+      window.clearInterval(interval);
+      window.clearTimeout(endTimer);
+    };
+  }, [isVisible, phase, img2Ready, text2.length]);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -91,11 +116,14 @@ export default function SplashIntro() {
             priority
             unoptimized
             className="object-cover splash-photo-1"
+            onLoadingComplete={() => setImg1Ready(true)}
           />
           <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className="px-6">
               <p
-                className="text-[20px] font-medium text-[#F7F2E8] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-delayed"
+                className={`text-[20px] font-medium text-[#F7F2E8] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-delayed ${
+                  img1Ready ? "" : "opacity-0"
+                }`}
                 style={{ fontFamily: "var(--font-maru-buri)" }}
               >
                 {text1}
@@ -115,11 +143,14 @@ export default function SplashIntro() {
             priority
             unoptimized
             className="object-cover"
+            onLoadingComplete={() => setImg2Ready(true)}
           />
           <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className="px-6">
               <p
-                className="text-[20px] font-medium text-[#F7F2E8] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-soft"
+                className={`text-[20px] font-medium text-[#F7F2E8] drop-shadow-[0_4px_10px_rgba(0,0,0,0.35)] splash-text-soft ${
+                  img2Ready ? "" : "opacity-0"
+                }`}
                 style={{ fontFamily: "var(--font-maru-buri)" }}
               >
                 {typedText}
@@ -127,7 +158,6 @@ export default function SplashIntro() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
