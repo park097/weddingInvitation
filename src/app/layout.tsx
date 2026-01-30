@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     siteName: "이충기 · 주은화 결혼합니다",
     images: [
       {
-        url: "/img/og.jpg",
+        url: "https://eunhwa-chunggi-wedding.vercel.app/img/og.jpg",
         width: 1200,
         height: 630,
         alt: "이충기 · 주은화 결혼합니다",
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "이충기 · 주은화 결혼합니다",
     description: "2026년 04월 26일 일요일 오후 12시30분\n마렌지 9",
-    images: ["/img/og.jpg"],
+    images: ["https://eunhwa-chunggi-wedding.vercel.app/img/og.jpg"],
   },
 };
 
