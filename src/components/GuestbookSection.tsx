@@ -195,7 +195,7 @@ export default function GuestbookSection() {
       <Reveal className="mt-4 flex justify-end gap-2 text-sm">
         <button
           type="button"
-          className="h-11 ui-rounded border border-neutral-200 bg-white px-6 font-medium"
+          className="h-11 ui-rounded border border-neutral-200 bg-white  px-6 font-medium"
           onClick={() => {
             resetForm();
             setIsFormOpen(true);
@@ -213,7 +213,7 @@ export default function GuestbookSection() {
       </Reveal>
 
       {isFormOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 flex items-center  translate-y-320 justify-center bg-black/40 px-4" role="dialog" aria-modal="true">
           <div className="w-full max-w-[420px] ui-rounded bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
               <p className="text-sm font-medium">방명록 등록</p>
@@ -271,7 +271,7 @@ export default function GuestbookSection() {
       ) : null}
 
       {isListOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 flex items-center  translate-y-300 justify-center bg-black/40 px-4" role="dialog" aria-modal="true">
           <div className="w-full max-w-[420px] ui-rounded bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
               <p className="text-sm font-medium">방명록 전체보기</p>
@@ -312,7 +312,7 @@ export default function GuestbookSection() {
       ) : null}
 
       {deleteTarget ? (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-[60] flex items-center translate-y-300 justify-center bg-black/50 px-4" role="dialog" aria-modal="true">
           <div className="w-full max-w-[360px] ui-rounded bg-white p-6 text-center shadow-2xl">
             <p className="text-sm font-medium text-neutral-800">방명록을 삭제할까요?</p>
             <p className="mt-1 text-xs text-neutral-500">등록 시 입력한 비밀번호를 입력해주세요.</p>
@@ -345,7 +345,7 @@ export default function GuestbookSection() {
       ) : null}
 
       {feedbackMessage ? (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-6" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-[60] flex items-center translate-y-300 justify-center bg-black/50 px-6" role="dialog" aria-modal="true">
           <div className="ui-rounded w-full max-w-[360px] bg-white px-6 py-7 text-center shadow-2xl">
             <p className="text-sm text-neutral-800">{feedbackMessage}</p>
             <button

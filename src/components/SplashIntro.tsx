@@ -132,7 +132,7 @@ export default function SplashIntro() {
           </div>
         </div>
         <div
-          className={`absolute inset-0 transition-opacity duration-600 ${
+          className={`absolute inset-0 transition-opacity duration-700 ${
             phase === 2 ? "opacity-100" : "opacity-0"
           }`}
         >

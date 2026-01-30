@@ -71,7 +71,7 @@ export default function GallerySection() {
 
           <button
             type="button"
-            className="absolute left-1 top-1/2 -translate-y-1/2 bg-transparent px-2 py-1 text-4xl text-white"
+            className="absolute left-1 top-1/2 -translate-y-1/2 bg-transparent px-2 py-1 text-3xl text-white/70 hover:text-white/90 transition"
             onClick={() => scrollToIndex(Math.max(activeIndex - 1, 0))}
             aria-label="이전 사진"
           >
@@ -79,7 +79,7 @@ export default function GallerySection() {
           </button>
           <button
             type="button"
-            className="absolute right-1 top-1/2 -translate-y-1/2 bg-transparent px-2 py-1 text-4xl text-white"
+            className="absolute right-1 top-1/2 -translate-y-1/2 bg-transparent px-2 py-1 text-3xl text-white/70 hover:text-white/90 transition"
             onClick={() => scrollToIndex(Math.min(activeIndex + 1, galleryImages.length - 1))}
             aria-label="다음 사진"
           >

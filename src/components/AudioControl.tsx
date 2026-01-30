@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const AUDIO_SRC = "/audio/MP_Dream.mp3";
 
@@ -20,7 +20,7 @@ export default function AudioControl() {
     };
   }, []);
 
-  const start = async () => {
+  const start = useCallback(async () => {
     const audio = audioRef.current;
     if (!audio) return;
     try {
@@ -30,15 +30,44 @@ export default function AudioControl() {
       // Autoplay can be blocked; user interaction required.
       setIsPlaying(false);
     }
-  };
+  }, []);
 
-  const stop = () => {
+  useEffect(() => {
+    const handleSplashEnd = () => {
+      start();
+    };
+
+    window.addEventListener("splash-ended", handleSplashEnd);
+    return () => {
+      window.removeEventListener("splash-ended", handleSplashEnd);
+    };
+  }, [start]);
+
+  useEffect(() => {
+    const handleUserGesture = () => {
+      start();
+    };
+
+    window.addEventListener("click", handleUserGesture, { once: true });
+    window.addEventListener("touchstart", handleUserGesture, { once: true, passive: true });
+    window.addEventListener("keydown", handleUserGesture, { once: true });
+    window.addEventListener("wheel", handleUserGesture, { once: true, passive: true });
+
+    return () => {
+      window.removeEventListener("click", handleUserGesture);
+      window.removeEventListener("touchstart", handleUserGesture);
+      window.removeEventListener("keydown", handleUserGesture);
+      window.removeEventListener("wheel", handleUserGesture);
+    };
+  }, [start]);
+
+  const stop = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
     audio.pause();
     audio.currentTime = 0;
     setIsPlaying(false);
-  };
+  }, []);
 
   return (
     <button
