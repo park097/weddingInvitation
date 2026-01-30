@@ -6,7 +6,8 @@ type MainEntranceProps = {
   children: React.ReactNode;
 };
 
-const ANIMATION_DURATION_MS = 700;
+const ANIMATION_DURATION_MS = 1200;
+const ANIMATION_DELAY_MS = 150;
 
 export default function MainEntrance({ children }: MainEntranceProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,8 +15,11 @@ export default function MainEntrance({ children }: MainEntranceProps) {
 
   useEffect(() => {
     const handleSplashEnd = () => {
-      setIsVisible(true);
-      window.setTimeout(() => setIsInteractive(true), ANIMATION_DURATION_MS);
+      window.setTimeout(() => setIsVisible(true), ANIMATION_DELAY_MS);
+      window.setTimeout(
+        () => setIsInteractive(true),
+        ANIMATION_DELAY_MS + ANIMATION_DURATION_MS
+      );
     };
 
     window.addEventListener("splash-ended", handleSplashEnd);
