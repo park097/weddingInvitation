@@ -80,15 +80,22 @@ export default function SplashIntro() {
   useEffect(() => {
     if (!isVisible) return;
 
-    const handleInteract = () => endSplash();
-    window.addEventListener("scroll", handleInteract, { passive: true });
-    window.addEventListener("touchstart", handleInteract, { passive: true });
-    window.addEventListener("click", handleInteract);
+    const handleScroll = () => {
+      window.scrollTo({ top: 0, left: 0 });
+    };
+
+    const preventDefault = (event: Event) => {
+      event.preventDefault();
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("wheel", preventDefault, { passive: false });
+    window.addEventListener("touchmove", preventDefault, { passive: false });
 
     return () => {
-      window.removeEventListener("scroll", handleInteract);
-      window.removeEventListener("touchstart", handleInteract);
-      window.removeEventListener("click", handleInteract);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", preventDefault);
+      window.removeEventListener("touchmove", preventDefault);
     };
   }, [isVisible]);
 

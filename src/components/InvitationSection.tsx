@@ -73,9 +73,13 @@ export default function InvitationSection({
         </Reveal>
 
         <Reveal className="mt-6 text-sm leading-7 text-neutral-600">
-          김건호 · 김어머니의 장남
+          <span className="font-semibold text-neutral-800">김건호</span> ·{" "}
+          <span className="font-semibold text-neutral-800">김어머니</span>의 장남{" "}
+          <span className="font-semibold text-neutral-800">이충기</span>
           <br />
-          이주모 · 이수진의 장녀
+          <span className="font-semibold text-neutral-800">이주모</span> ·{" "}
+          <span className="font-semibold text-neutral-800">이수진</span>의 장녀{" "}
+          <span className="font-semibold text-neutral-800">주은화</span>
         </Reveal>
 
         <Reveal className="mt-3">
