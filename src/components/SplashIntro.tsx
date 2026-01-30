@@ -9,6 +9,8 @@ const IMAGE_2 = "/img/img2.jpg";
 const MAX_WAIT_MS = 7000;
 const PHOTO_1_DURATION_MS = 2000;
 const PHOTO_2_DURATION_MS = 2000;
+const TYPING_INTERVAL_MS = 120;
+const TEXT_END_DELAY_MS = 300;
 
 export default function SplashIntro() {
   const [isVisible, setIsVisible] = useState(true);
@@ -65,11 +67,12 @@ export default function SplashIntro() {
       if (current >= text2.length) {
         window.clearInterval(interval);
       }
-    }, 120);
+    }, TYPING_INTERVAL_MS);
 
+    const totalTypingTime = text2.length * TYPING_INTERVAL_MS + TEXT_END_DELAY_MS;
     const endTimer = window.setTimeout(() => {
       endSplash();
-    }, PHOTO_2_DURATION_MS);
+    }, Math.max(PHOTO_2_DURATION_MS, totalTypingTime));
 
     return () => {
       window.clearInterval(interval);
