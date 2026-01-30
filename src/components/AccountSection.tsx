@@ -109,7 +109,7 @@ export default function AccountSection() {
       </div>
 
       {isCopyModalOpen ? (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-6" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center translate-y-420 bg-black/50 px-6" role="dialog" aria-modal="true">
           <div className="ui-rounded w-full max-w-[360px] bg-white px-6 py-7 text-center shadow-2xl">
             <p className="text-sm text-neutral-800">복사가 완료되었습니다.</p>
             <button
