@@ -12,15 +12,15 @@ type Contact = {
 };
 
 const groomContacts: Contact[] = [
-  { label: "신랑", name: "이충기", phone: "010-1234-5678" },
-  { label: "신랑 아버지", name: "이건호", phone: "010-2222-1111" },
-  { label: "신랑 어머니", name: "이어머니", phone: "010-3333-4444" },
+  { label: "신랑", name: "이충기", phone: "010-2889-4828" },
+  { label: "신랑 아버지", name: "이승재", phone: "010-3111-3456" },
+  { label: "신랑 어머니", name: "양윤정", phone: "010-3334-4828" },
 ];
 
 const brideContacts: Contact[] = [
-  { label: "신부", name: "주은화", phone: "010-5555-6666" },
-  { label: "신부 아버지", name: "주주모", phone: "010-7777-8888" },
-  { label: "신부 어머니", name: "주수진", phone: "010-9999-0000" },
+  { label: "신부", name: "주은화", phone: "010-9591-2523" },
+  { label: "신부 아버지", name: "주귀선", phone: "010-4236-0700" },
+  { label: "신부 어머니", name: "최명숙", phone: "010-9860-2523" },
 ];
 
 type InvitationSectionProps = {
@@ -73,12 +73,12 @@ export default function InvitationSection({
         </Reveal>
 
         <Reveal className="mt-6 text-sm leading-7 text-neutral-600">
-          <span className="font-semibold text-neutral-800">김건호</span> ·{" "}
-          <span className="font-semibold text-neutral-800">김어머니</span>의 장남{" "}
+          <span className="font-semibold text-neutral-800">이승재</span> ·{" "}
+          <span className="font-semibold text-neutral-800">양윤정</span>의 장남{" "}
           <span className="font-semibold text-neutral-800">이충기</span>
           <br />
-          <span className="font-semibold text-neutral-800">이주모</span> ·{" "}
-          <span className="font-semibold text-neutral-800">이수진</span>의 장녀{" "}
+          <span className="font-semibold text-neutral-800">주귀선</span> ·{" "}
+          <span className="font-semibold text-neutral-800">최명숙</span>의 장녀{" "}
           <span className="font-semibold text-neutral-800">주은화</span>
         </Reveal>
 

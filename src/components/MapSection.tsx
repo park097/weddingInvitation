@@ -89,11 +89,11 @@ export default function MapSection() {
             </p>
             <p className="flex items-start gap-2">
               <Dot color="#8E4EC6" />
-              <span>5호선 동대문역사문화공원역 및 인근 1호선 동대문역</span>
+              <span>5호선 동대문역사문화공원역</span>
             </p>
           </div>
           <p className="mt-3 text-xs text-neutral-500">
-            마린19건물(롯데던던) 지하2층 출입구와 직접 연결
+            마렌지9건물(롯데던던) 지하2층 출입구와 직접 연결
           </p>
         </section>
 
@@ -117,7 +117,7 @@ export default function MapSection() {
 
         <section className="mt-6 border-t border-dashed border-neutral-200 pt-5">
           <p className="font-semibold text-neutral-800">주차</p>
-          <p className="mt-2 text-neutral-700">600대 이상 주차 가능</p>
+          <p className="mt-2 text-neutral-700">200대 이상 주차 가능</p>
         </section>
       </Reveal>
     </SectionCard>
