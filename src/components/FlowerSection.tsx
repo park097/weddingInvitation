@@ -114,7 +114,7 @@ export default function FlowerSection() {
             fill
             className="object-cover"
           />
-          <div className="absolute bottom-100 left-6 right-6 text-left text-sm font-medium text-white drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]">
+          <div className="absolute bottom-110 left-6 right-6 text-left text-sm font-medium text-white drop-shadow-[0_6px_12px_rgba(0,0,0,0.35)]">
             함께하려다, 세상이 다 겨울이어도
             <br />
             우리 사랑은 봄처럼 따뜻하고

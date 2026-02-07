@@ -5,6 +5,37 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SectionCard from "@/components/SectionCard";
 
+type KakaoLatLng = { __kakaoLatLng: true };
+
+type KakaoMap = {
+  setCenter: (coords: KakaoLatLng) => void;
+};
+
+type KakaoGeocoderResult = {
+  x: string;
+  y: string;
+};
+
+type KakaoMaps = {
+  load: (callback: () => void) => void;
+  Map: new (container: HTMLElement, options: { center: KakaoLatLng; level: number }) => KakaoMap;
+  LatLng: new (lat: number, lng: number) => KakaoLatLng;
+  Marker: new (options: { map: KakaoMap; position: KakaoLatLng }) => void;
+  services: {
+    Geocoder: new () => {
+      addressSearch: (
+        address: string,
+        callback: (result: KakaoGeocoderResult[], status: string) => void
+      ) => void;
+    };
+    Status: { OK: string };
+  };
+};
+
+type KakaoGlobal = {
+  maps: KakaoMaps;
+};
+
 const Dot = ({ color }: { color: string }) => (
   <span
     className="mt-[2px] inline-block h-2.5 w-2.5 shrink-0 rounded-full"
@@ -18,10 +49,9 @@ export default function MapSection() {
   const venueAddress = "서울 중구 을지로 264 9층 9001호";
   const kakaoMapUrl = `https://map.kakao.com/link/search/${encodeURIComponent(venueAddress)}`;
   const naverMapUrl = `https://map.naver.com/v5/search/${encodeURIComponent(venueAddress)}`;
-  const tmapUrl = `https://apis.openapi.sk.com/tmap/app/search?name=${encodeURIComponent(venueAddress)}`;
 
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any>(null);
+  const mapInstanceRef = useRef<KakaoMap | null>(null);
 
   useEffect(() => {
     const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
@@ -30,7 +60,7 @@ export default function MapSection() {
     }
 
     const initMap = () => {
-      const kakao = (window as any).kakao;
+      const kakao = (window as Window & { kakao?: KakaoGlobal }).kakao;
       if (!kakao?.maps || !mapRef.current || mapInstanceRef.current) {
         return;
       }
@@ -48,7 +78,7 @@ export default function MapSection() {
         mapInstanceRef.current = map;
         const geocoder = new kakao.maps.services.Geocoder();
 
-        geocoder.addressSearch(venueAddress, (result: any, status: any) => {
+        geocoder.addressSearch(venueAddress, (result: KakaoGeocoderResult[], status: string) => {
           if (status === kakao.maps.services.Status.OK && result[0]) {
             const coords = new kakao.maps.LatLng(Number(result[0].y), Number(result[0].x));
             map.setCenter(coords);
@@ -60,7 +90,8 @@ export default function MapSection() {
 
     const existingScript = document.getElementById("kakao-map-sdk");
     if (existingScript) {
-      if ((window as any).kakao?.maps) {
+      const existingKakao = (window as Window & { kakao?: KakaoGlobal }).kakao;
+      if (existingKakao?.maps) {
         initMap();
       } else {
         existingScript.addEventListener("load", initMap, { once: true });
@@ -146,11 +177,11 @@ export default function MapSection() {
             </p>
             <p className="flex items-start gap-2">
               <Dot color="#8E4EC6" />
-              <span>5호선 동대문역사문화공원역 및 인근 1호선 동대문역</span>
+              <span>5호선 동대문역사문화공원역</span>
             </p>
           </div>
           <p className="mt-3 text-xs text-neutral-500">
-            마린19건물(롯데던던) 지하2층 출입구와 직접 연결
+            마렌지9건물(롯데던던) 지하2층 출입구와 직접 연결
           </p>
         </section>
 
@@ -174,7 +205,7 @@ export default function MapSection() {
 
         <section className="mt-6 border-t border-dashed border-neutral-200 pt-5">
           <p className="font-semibold text-neutral-800">주차</p>
-          <p className="mt-2 text-neutral-700">600대 이상 주차 가능</p>
+          <p className="mt-2 text-neutral-700">200대 이상 주차 가능</p>
         </section>
       </Reveal>
     </SectionCard>
