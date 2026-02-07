@@ -1,4 +1,7 @@
-﻿import Image from "next/image";
+﻿"use client";
+
+import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SectionCard from "@/components/SectionCard";
 
@@ -17,6 +20,62 @@ export default function MapSection() {
   const naverMapUrl = `https://map.naver.com/v5/search/${encodeURIComponent(venueAddress)}`;
   const tmapUrl = `https://apis.openapi.sk.com/tmap/app/search?name=${encodeURIComponent(venueAddress)}`;
 
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
+
+  useEffect(() => {
+    const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
+    if (!key || !mapRef.current || mapInstanceRef.current) {
+      return;
+    }
+
+    const initMap = () => {
+      const kakao = (window as any).kakao;
+      if (!kakao?.maps || !mapRef.current || mapInstanceRef.current) {
+        return;
+      }
+
+      kakao.maps.load(() => {
+        if (!mapRef.current || mapInstanceRef.current) {
+          return;
+        }
+
+        const map = new kakao.maps.Map(mapRef.current, {
+          center: new kakao.maps.LatLng(37.5665, 126.9780),
+          level: 3,
+        });
+
+        mapInstanceRef.current = map;
+        const geocoder = new kakao.maps.services.Geocoder();
+
+        geocoder.addressSearch(venueAddress, (result: any, status: any) => {
+          if (status === kakao.maps.services.Status.OK && result[0]) {
+            const coords = new kakao.maps.LatLng(Number(result[0].y), Number(result[0].x));
+            map.setCenter(coords);
+            new kakao.maps.Marker({ map, position: coords });
+          }
+        });
+      });
+    };
+
+    const existingScript = document.getElementById("kakao-map-sdk");
+    if (existingScript) {
+      if ((window as any).kakao?.maps) {
+        initMap();
+      } else {
+        existingScript.addEventListener("load", initMap, { once: true });
+      }
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = "kakao-map-sdk";
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${key}&autoload=false&libraries=services`;
+    script.async = true;
+    script.addEventListener("load", initMap);
+    document.head.appendChild(script);
+  }, [venueAddress]);
+
   return (
     <SectionCard className="text-center">
       <Reveal className="serif text-sm tracking-[0.3em] text-neutral-500">
@@ -30,12 +89,10 @@ export default function MapSection() {
       </Reveal>
 
       <Reveal className="mt-5 ui-rounded overflow-hidden border border-neutral-200/70">
-        <Image
-          src="/map.svg"
-          alt="Map preview"
-          width={800}
-          height={520}
-          className="h-auto w-full"
+        <div
+          ref={mapRef}
+          className="h-[260px] w-full bg-neutral-100 sm:h-[320px]"
+          aria-label="카카오맵 위치"
         />
       </Reveal>
 
