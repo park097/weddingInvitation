@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SectionCard from "@/components/SectionCard";
@@ -52,6 +52,7 @@ export default function MapSection() {
 
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<KakaoMap | null>(null);
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
 
   useEffect(() => {
     const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
@@ -125,6 +126,19 @@ export default function MapSection() {
           className="h-[260px] w-full bg-neutral-100 sm:h-[320px]"
           aria-label="카카오맵 위치"
         />
+      </Reveal>
+
+      <Reveal className="mt-5">
+        <button
+          type="button"
+          className="ui-rounded inline-flex h-12 w-full items-center justify-center gap-2 border border-neutral-200 bg-white text-sm font-medium text-neutral-700"
+          onClick={() => setIsMapModalOpen(true)}
+        >
+          <span className="flex h-4 w-4 items-center justify-center" aria-hidden="true">
+            <Image src="/icon/mapIcon.png" alt="" width={16} height={16} />
+          </span>
+          약도 이미지 보기
+        </button>
       </Reveal>
 
       <Reveal className="mt-6 text-left text-sm text-neutral-600">
@@ -208,6 +222,35 @@ export default function MapSection() {
           <p className="mt-2 text-neutral-700">200대 이상 주차 가능</p>
         </section>
       </Reveal>
+
+      {isMapModalOpen ? (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 px-4"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="ui-rounded w-full max-w-[520px] bg-white translate-y-55 p-4 shadow-2xl">
+            <div className="flex items-center">
+              <button
+                type="button"
+                className="ui-rounded ml-auto px-2 py-1 text-sm text-neutral-500"
+                onClick={() => setIsMapModalOpen(false)}
+              >
+                닫기
+              </button>
+            </div>
+            <div className="mt-3 overflow-hidden ui-rounded border  border-neutral-200/70">
+              <Image
+                src="/img/map.jpg"
+                alt="약도 이미지"
+                width={1000}
+                height={1400}
+                className="h-auto w-full"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </SectionCard>
   );
 }

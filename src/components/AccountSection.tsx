@@ -23,7 +23,7 @@ const brideAccounts: Account[] = [
 ];
 
 export default function AccountSection() {
-  const [openPanel, setOpenPanel] = useState<"groom" | "bride" | null>("groom");
+  const [openPanels, setOpenPanels] = useState({ groom: true, bride: true });
   const [isCopyModalOpen, setIsCopyModalOpen] = useState(false);
 
   const panels = useMemo(
@@ -40,7 +40,7 @@ export default function AccountSection() {
     try {
       await navigator.clipboard.writeText(text);
       setIsCopyModalOpen(true);
-    } catch (error) {
+    } catch {
       window.alert("계좌번호 복사에 실패했습니다. 길게 눌러 복사해주세요.");
     }
   };
@@ -59,7 +59,7 @@ export default function AccountSection() {
 
       <div className="mt-6 space-y-3 text-left text-sm">
         {panels.map((panel) => {
-          const isOpen = openPanel === panel.id;
+          const isOpen = openPanels[panel.id];
           return (
             <div
               key={panel.id}
@@ -68,7 +68,9 @@ export default function AccountSection() {
               <button
                 type="button"
                 className="flex w-full items-center justify-between bg-neutral-100 px-4 py-3 text-sm font-medium text-neutral-700"
-                onClick={() => setOpenPanel(isOpen ? null : panel.id)}
+                onClick={() =>
+                  setOpenPanels((prev) => ({ ...prev, [panel.id]: !prev[panel.id] }))
+                }
                 aria-expanded={isOpen}
               >
                 <span>{panel.title}</span>
