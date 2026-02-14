@@ -52,7 +52,7 @@ export default function MapSection() {
 
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<KakaoMap | null>(null);
-  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+  const [isMapImageOpen, setIsMapImageOpen] = useState(false);
 
   useEffect(() => {
     const key = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
@@ -132,14 +132,30 @@ export default function MapSection() {
         <button
           type="button"
           className="ui-rounded inline-flex h-12 w-full items-center justify-center gap-2 border border-neutral-200 bg-white text-sm font-medium text-neutral-700"
-          onClick={() => setIsMapModalOpen(true)}
+          onClick={() => setIsMapImageOpen((prev) => !prev)}
         >
           <span className="flex h-4 w-4 items-center justify-center" aria-hidden="true">
             <Image src="/icon/mapIcon.png" alt="" width={16} height={16} />
           </span>
-          약도 이미지 보기
+          {isMapImageOpen ? "약도 이미지 닫기" : "약도 이미지 보기"}
         </button>
       </Reveal>
+      {isMapImageOpen ? (
+        <Reveal className="mt-3">
+          <div className="ui-rounded overflow-hidden border border-neutral-200/70 bg-white">
+            <a href="/img/map.jpg" target="_blank" rel="noreferrer" className="block">
+              <Image
+                src="/img/map.jpg"
+                alt="약도 이미지"
+                width={1000}
+                height={1400}
+                className="h-auto w-full"
+              />
+            </a>
+          </div>
+          <p className="mt-2 text-center text-xs text-neutral-500">이미지를 누르면 원본에서 확대해서 볼 수 있습니다.</p>
+        </Reveal>
+      ) : null}
 
       <Reveal className="mt-6 text-left text-sm text-neutral-600">
         <div className="border-t border-dashed border-neutral-200 pt-5">
@@ -223,34 +239,6 @@ export default function MapSection() {
         </section>
       </Reveal>
 
-      {isMapModalOpen ? (
-        <div
-          className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 px-4 pb-[clamp(16px,1000vh,2350px)]"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="ui-rounded w-full max-w-[520px] max-h-[85vh] overflow-y-auto bg-white p-4 shadow-2xl">
-            <div className="flex items-center">
-              <button
-                type="button"
-                className="ui-rounded ml-auto px-2 py-1 text-sm text-neutral-500"
-                onClick={() => setIsMapModalOpen(false)}
-              >
-                닫기
-              </button>
-            </div>
-            <div className="mt-3 overflow-hidden ui-rounded border  border-neutral-200/70">
-              <Image
-                src="/img/map.jpg"
-                alt="약도 이미지"
-                width={1000}
-                height={1400}
-                className="h-auto w-full"
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
     </SectionCard>
   );
 }
