@@ -225,7 +225,7 @@ export default function MapSection() {
 
       {isMapModalOpen ? (
         <div
-          className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 px-4 pb-580"
+          className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 px-4 pb-[clamp(16px,1000vh,2350px)]"
           role="dialog"
           aria-modal="true"
         >
