@@ -225,11 +225,11 @@ export default function MapSection() {
 
       {isMapModalOpen ? (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 px-4"
+          className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 px-4 pb-4 sm:items-center sm:pb-0"
           role="dialog"
           aria-modal="true"
         >
-          <div className="ui-rounded w-full max-w-[520px] bg-white translate-y-55 p-4 shadow-2xl">
+          <div className="ui-rounded w-full max-w-[520px] max-h-[85vh] overflow-y-auto bg-white p-4 shadow-2xl translate-y-[55px] sm:translate-y-[280px]">
             <div className="flex items-center">
               <button
                 type="button"

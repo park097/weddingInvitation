@@ -11,9 +11,9 @@ type Account = {
 };
 
 const groomAccounts: Account[] = [
-  { name: "이충기", bank: "신한은행", number: "110-000-00000" },
-  { name: "이승재", bank: "우리은행", number: "110-000-00000" },
-  { name: "양윤정", bank: "국민은행", number: "110-000-00000" },
+  { name: "이충기", bank: "기업은행", number: "019-083914-01013" },
+  { name: "이승재", bank: "국민은행", number: "441501-01-307403" },
+  { name: "양윤정", bank: "국민은행", number: "022-240400-243" },
 ];
 
 const brideAccounts: Account[] = [
@@ -25,6 +25,7 @@ const brideAccounts: Account[] = [
 export default function AccountSection() {
   const [openPanels, setOpenPanels] = useState({ groom: true, bride: true });
   const [isCopyModalOpen, setIsCopyModalOpen] = useState(false);
+  
 
   const panels = useMemo(
     () => [

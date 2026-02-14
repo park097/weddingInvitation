@@ -5,22 +5,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
 import SectionCard from "@/components/SectionCard";
 
-const baseImages = [
-  { src: "/img/img1.jpg", alt: "Wedding portrait 1" },
-  { src: "/img/img2.jpg", alt: "Wedding portrait 2" },
-  { src: "/img/img3.jpg", alt: "Wedding portrait 3" },
-  { src: "/img/img4.jpg", alt: "Wedding portrait 4" },
-  { src: "/img/img5.jpg" ,alt: "Wedding portrait 5" },
-  { src: "/img/img6.jpg", alt: "Wedding portrait 6" },
-];
-
 export default function GallerySection() {
   const galleryImages = useMemo(
     () =>
-      Array.from({ length: 15 }, (_, index) => {
-        const item = baseImages[index % baseImages.length];
-        return { ...item, id: `${item.src}-${index}` };
-      }),
+      Array.from({ length: 29 }, (_, index) => ({
+        src: `/img/img${index + 1}.jpg`,
+        alt: `Wedding portrait ${index + 1}`,
+        id: `img-${index + 1}`,
+      })),
     []
   );
 
@@ -60,11 +52,30 @@ export default function GallerySection() {
         <div className="relative -mx-6">
           <div
             ref={scrollerRef}
-            className="hide-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth bg-neutral-100"
+            className="hide-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth bg-neutral-100 touch-pan-x"
+            onContextMenu={(event) => event.preventDefault()}
           >
             {galleryImages.map((item) => (
-              <div key={item.id} className="relative aspect-[4/5] w-full flex-none snap-center">
-                <Image src={item.src} alt={item.alt} fill className="object-cover" />
+              <div
+                key={item.id}
+                className={`relative w-full flex-none snap-center ${
+                  item.src === "/img/img10.jpg"
+                    ? "h-[100vh] min-h-[280px] max-h-[460px]"
+                    : "h-[64vh] min-h-[320px] max-h-[560px]"
+                }`}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  draggable={false}
+                  onDragStart={(event) => event.preventDefault()}
+                  className={
+                    item.src === "/img/img10.jpg"
+                      ? "object-contain object-[50%_62%] bg-neutral-100 select-none pointer-events-none"
+                      : "object-cover select-none pointer-events-none"
+                  }
+                />
               </div>
             ))}
           </div>
@@ -108,3 +119,4 @@ export default function GallerySection() {
     </SectionCard>
   );
 }
+
