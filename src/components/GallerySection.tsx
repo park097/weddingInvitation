@@ -8,7 +8,7 @@ import SectionCard from "@/components/SectionCard";
 export default function GallerySection() {
   const galleryImages = useMemo(
     () =>
-      Array.from({ length: 29 }, (_, index) => ({
+      Array.from({ length: 15 }, (_, index) => ({
         src: `/img/gall/img${index + 1}.jpg`,
         alt: `Wedding portrait ${index + 1}`,
         id: `img-${index + 1}`,
