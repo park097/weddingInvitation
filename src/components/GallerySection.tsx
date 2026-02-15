@@ -60,8 +60,8 @@ export default function GallerySection() {
                 key={item.id}
                 className={`relative w-full flex-none snap-center ${
                   index === 9
-                    ? "h-[100vh] min-h-[280px]"
-                    : "h-[100vh] min-h-[320px]"
+                    ? "h-[100vh] min-h-[280px] max-h-[460px]"
+                    : "h-[64vh] min-h-[320px] max-h-[560px]"
                 }`}
               >
                 <Image
