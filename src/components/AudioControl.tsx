@@ -26,7 +26,7 @@ export default function AudioControl() {
     try {
       await audio.play();
       setIsPlaying(true);
-    } catch (error) {
+    } catch {
       // Autoplay can be blocked; user interaction required.
       setIsPlaying(false);
     }

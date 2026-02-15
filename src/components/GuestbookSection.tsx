@@ -118,7 +118,7 @@ export default function GuestbookSection() {
       resetForm();
       setIsFormOpen(false);
       setFeedbackMessage("저장되었습니다");
-    } catch (error) {
+    } catch {
       setFormError("등록에 실패했습니다. 잠시 후 다시 시도해주세요.");
     }
   };
@@ -148,7 +148,7 @@ export default function GuestbookSection() {
       setDeleteTarget(null);
       setDeletePassword("");
       setFeedbackMessage("삭제되었습니다");
-    } catch (error) {
+    } catch {
       setDeleteError("삭제에 실패했습니다. 잠시 후 다시 시도해주세요.");
     }
   };

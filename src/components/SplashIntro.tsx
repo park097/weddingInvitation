@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const IMAGE_1 = "/img/img1.jpg";
 const IMAGE_2 = "/img/img2.jpg";
@@ -24,6 +24,12 @@ export default function SplashIntro() {
   const text2 = "소중한 분들을 초대합니다";
 
   const typedText = useMemo(() => text2.slice(0, typedCount), [text2, typedCount]);
+  const endSplash = useCallback(() => {
+    if (hasCompletedRef.current) return;
+    hasCompletedRef.current = true;
+    setIsVisible(false);
+    window.dispatchEvent(new Event("splash-ended"));
+  }, []);
 
   // Safety: don't wait forever if the image never loads.
   useEffect(() => {
@@ -52,14 +58,15 @@ export default function SplashIntro() {
   useEffect(() => {
     if (!isVisible || !img1Ready) return;
 
-    const timer = window.setTimeout(() => setPhase(2), PHOTO_1_DURATION_MS);
+    const timer = window.setTimeout(() => {
+      setTypedCount(0);
+      setPhase(2);
+    }, PHOTO_1_DURATION_MS);
     return () => window.clearTimeout(timer);
   }, [isVisible, img1Ready]);
 
   useEffect(() => {
     if (!isVisible || phase !== 2 || !img2Ready) return;
-
-    setTypedCount(0);
     let current = 0;
     const interval = window.setInterval(() => {
       current += 1;
@@ -78,7 +85,7 @@ export default function SplashIntro() {
       window.clearInterval(interval);
       window.clearTimeout(endTimer);
     };
-  }, [isVisible, phase, img2Ready, text2.length]);
+  }, [endSplash, isVisible, phase, img2Ready, text2.length]);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -101,13 +108,6 @@ export default function SplashIntro() {
       window.removeEventListener("touchmove", preventDefault);
     };
   }, [isVisible]);
-
-  const endSplash = () => {
-    if (hasCompletedRef.current) return;
-    hasCompletedRef.current = true;
-    setIsVisible(false);
-    window.dispatchEvent(new Event("splash-ended"));
-  };
 
   if (!isVisible) return null;
 

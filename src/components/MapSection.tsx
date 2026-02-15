@@ -199,11 +199,11 @@ export default function MapSection() {
           <div className="mt-3 space-y-2">
             <p className="flex items-start gap-2">
               <Dot color="#00A84D" />
-              <span>2호선 동대문역사문화공원역 11번 출구에서 91m</span>
+              <span>2호선 동대문역사문화공원역</span>
             </p>
             <p className="flex items-start gap-2">
               <Dot color="#00A5DE" />
-              <span>4호선 동대문역사문화공원역 11,12번 출구</span>
+              <span>4호선 동대문역사문화공원역</span>
             </p>
             <p className="flex items-start gap-2">
               <Dot color="#8E4EC6" />
@@ -211,7 +211,8 @@ export default function MapSection() {
             </p>
           </div>
           <p className="mt-3 text-xs text-neutral-500">
-            마렌지9건물(롯데던던) 지하2층 출입구와 직접 연결
+            지하철 11,12번 출구(2호선) 던던쇼핑몰(마렌지9)<br />
+            지하2층 출입구와 직접 연결
           </p>
         </section>
 

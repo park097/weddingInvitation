@@ -16,7 +16,9 @@ export default function Reveal({
   initialVisible = false,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(
+    () => initialVisible || (typeof window !== "undefined" && window.scrollY > 0)
+  );
 
   useEffect(() => {
     const element = ref.current;
@@ -35,9 +37,7 @@ export default function Reveal({
       }
     };
 
-    if (window.scrollY > 0) {
-      setHasScrolled(true);
-    } else {
+    if (!hasScrolled) {
       window.addEventListener("scroll", onScroll, { passive: true });
     }
 

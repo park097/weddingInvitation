@@ -7,7 +7,6 @@ import GuestbookSection from "@/components/GuestbookSection";
 import AccountSection from "@/components/AccountSection";
 import FlowerSection from "@/components/FlowerSection";
 import AudioControl from "@/components/AudioControl";
-import Reveal from "@/components/Reveal";
 import SplashIntro from "@/components/SplashIntro";
 import MainEntrance from "@/components/MainEntrance";
 
@@ -23,7 +22,7 @@ export default function Home() {
       <div className="relative z-20 mx-auto mt-0 w-full max-w-[420px] px-4 pb-0">
           <div className="ui-surface -mt-px" style={{ borderTop: "0" }}>
             <div className="ui-surface-flat">
-              <InvitationSection withDivider={false} />
+              <InvitationSection />
             </div>
             <GallerySection />
             <DateLocationSection />

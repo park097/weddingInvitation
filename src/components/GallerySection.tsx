@@ -9,7 +9,7 @@ export default function GallerySection() {
   const galleryImages = useMemo(
     () =>
       Array.from({ length: 29 }, (_, index) => ({
-        src: `/img/img${index + 1}.jpg`,
+        src: `/img/gall/img${index + 1}.jpg`,
         alt: `Wedding portrait ${index + 1}`,
         id: `img-${index + 1}`,
       })),
@@ -55,23 +55,26 @@ export default function GallerySection() {
             className="hide-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth bg-neutral-100 touch-pan-x"
             onContextMenu={(event) => event.preventDefault()}
           >
-            {galleryImages.map((item) => (
+            {galleryImages.map((item, index) => (
               <div
                 key={item.id}
                 className={`relative w-full flex-none snap-center ${
-                  item.src === "/img/img10.jpg"
-                    ? "h-[100vh] min-h-[280px] max-h-[460px]"
-                    : "h-[64vh] min-h-[320px] max-h-[560px]"
+                  index === 9
+                    ? "h-[100vh] min-h-[280px]"
+                    : "h-[100vh] min-h-[320px]"
                 }`}
               >
                 <Image
                   src={item.src}
                   alt={item.alt}
                   fill
+                  priority={index === 0}
+                  unoptimized
+                  sizes="(max-width: 420px) 100vw, 420px"
                   draggable={false}
                   onDragStart={(event) => event.preventDefault()}
                   className={
-                    item.src === "/img/img10.jpg"
+                    index === 9
                       ? "object-contain object-[50%_62%] bg-neutral-100 select-none pointer-events-none"
                       : "object-cover select-none pointer-events-none"
                   }
@@ -111,7 +114,14 @@ export default function GallerySection() {
               }`}
               aria-label={`갤러리 이미지 ${index + 1}`}
             >
-              <Image src={item.src} alt={item.alt} fill className="object-cover" />
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                unoptimized
+                sizes="(max-width: 420px) 20vw, 84px"
+                className="object-cover"
+              />
             </button>
           ))}
         </div>

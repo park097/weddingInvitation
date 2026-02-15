@@ -23,10 +23,6 @@ const brideContacts: Contact[] = [
   { label: "신부 어머니", name: "최명숙", phone: "010-9860-2523" },
 ];
 
-type InvitationSectionProps = {
-  withDivider?: boolean;
-};
-
 const PhoneIcon = () => (
   <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
     <path
@@ -37,9 +33,7 @@ const PhoneIcon = () => (
 );
 
 
-export default function InvitationSection({
-  withDivider = true,
-}: InvitationSectionProps) {
+export default function InvitationSection() {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (

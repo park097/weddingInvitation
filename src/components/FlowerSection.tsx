@@ -20,9 +20,10 @@ declare global {
 const KAKAO_SDK_SRC = "https://developers.kakao.com/sdk/js/kakao.min.js";
 
 export default function FlowerSection() {
-  const [isSdkReady, setIsSdkReady] = useState(false);
-
   const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
+  const [isSdkReady, setIsSdkReady] = useState(
+    () => !!kakaoKey && typeof window !== "undefined" && !!window.Kakao?.isInitialized?.()
+  );
 
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
@@ -31,11 +32,7 @@ export default function FlowerSection() {
 
   useEffect(() => {
     if (!kakaoKey) return;
-
-    if (window.Kakao?.isInitialized()) {
-      setIsSdkReady(true);
-      return;
-    }
+    if (window.Kakao?.isInitialized()) return;
 
     const existing = document.querySelector<HTMLScriptElement>(
       `script[src="${KAKAO_SDK_SRC}"]`
@@ -47,7 +44,7 @@ export default function FlowerSection() {
           window.Kakao?.init(kakaoKey);
         }
         setIsSdkReady(true);
-      } catch (error) {
+      } catch {
         setIsSdkReady(false);
       }
     };
@@ -99,7 +96,7 @@ export default function FlowerSection() {
           },
         ],
       });
-    } catch (error) {
+    } catch {
       window.alert("카카오톡 공유를 열지 못했습니다. 잠시 후 다시 시도해주세요.");
     }
   }, [isSdkReady, kakaoKey, shareUrl]);
@@ -109,7 +106,7 @@ export default function FlowerSection() {
       <Reveal className="p-0">
         <div className="relative -mx-6 h-[88vh] w-[calc(100%+3rem)] overflow-hidden">
           <Image
-       src="/img/img6.jpg"
+            src="/img/img6.jpg"
             alt="Wedding photo"
             fill
             className="object-cover"
@@ -129,7 +126,7 @@ export default function FlowerSection() {
             onClick={handleKakaoShare}
             className="absolute bottom-10 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap text-sm font-medium text-[#3a332f] no-underline"
           >
-<          Image src="/icon/kakaotalk_btn.png" alt="카카오톡" width={22} height={22} />
+            <Image src="/icon/kakaotalk_btn.png" alt="카카오톡" width={22} height={22} />
             카카오톡으로 초대장 보내기
           </button>
         </div>

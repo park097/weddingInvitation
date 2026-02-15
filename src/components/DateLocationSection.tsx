@@ -23,27 +23,31 @@ const getCountdown = (): Countdown => {
   return { days, hours, minutes, seconds };
 };
 
-const INITIAL_COUNTDOWN: Countdown = {
-  days: 0,
-  hours: 0,
-  minutes: 0,
-  seconds: 0,
-};
-
 const CALENDAR_YEAR = 2026;
 const CALENDAR_MONTH_INDEX = 3; 
 
 export default function DateLocationSection() {
-  const [countdown, setCountdown] = useState<Countdown>(INITIAL_COUNTDOWN);
+  const [countdown, setCountdown] = useState<Countdown>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    setCountdown(getCountdown());
-
-    const interval = setInterval(() => {
+    const updateCountdown = () => {
       setCountdown(getCountdown());
+    };
+
+    const syncTimer = setTimeout(updateCountdown, 0);
+    const interval = setInterval(() => {
+      updateCountdown();
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(syncTimer);
+      clearInterval(interval);
+    };
   }, []);
 
   const calendarCells = useMemo(() => {
