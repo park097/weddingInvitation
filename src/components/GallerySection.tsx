@@ -69,7 +69,6 @@ export default function GallerySection() {
                   alt={item.alt}
                   fill
                   priority={index === 0}
-                  unoptimized
                   sizes="(max-width: 420px) 100vw, 420px"
                   draggable={false}
                   onDragStart={(event) => event.preventDefault()}
