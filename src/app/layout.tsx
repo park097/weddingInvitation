@@ -7,27 +7,27 @@ const pretendard = localFont({
   display: "swap",
   src: [
     {
-      path: "../../public/fonts/Pretendard-ExtraLight.otf",
+      path: "../fonts/Pretendard-ExtraLight.otf",
       weight: "200",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Pretendard-Light.otf",
+      path: "../fonts/Pretendard-Light.otf",
       weight: "300",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Pretendard-Regular.otf",
+      path: "../fonts/Pretendard-Regular.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Pretendard-SemiBold.otf",
+      path: "../fonts/Pretendard-SemiBold.otf",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Pretendard-Bold.otf",
+      path: "../fonts/Pretendard-Bold.otf",
       weight: "700",
       style: "normal",
     },
@@ -39,27 +39,27 @@ const maruBuri = localFont({
   display: "swap",
   src: [
     {
-      path: "../../public/fonts/MaruBuri-ExtraLight.ttf",
+      path: "../fonts/MaruBuri-ExtraLight.ttf",
       weight: "200",
       style: "normal",
     },
     {
-      path: "../../public/fonts/MaruBuri-Light.ttf",
+      path: "../fonts/MaruBuri-Light.ttf",
       weight: "300",
       style: "normal",
     },
     {
-      path: "../../public/fonts/MaruBuri-Regular.ttf",
+      path: "../fonts/MaruBuri-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/MaruBuri-SemiBold.ttf",
+      path: "../fonts/MaruBuri-SemiBold.ttf",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../../public/fonts/MaruBuri-Bold.ttf",
+      path: "../fonts/MaruBuri-Bold.ttf",
       weight: "700",
       style: "normal",
     },
