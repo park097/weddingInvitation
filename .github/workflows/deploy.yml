@@ -6,23 +6,34 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Deploy to EC2
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy static files
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "out/*"
+          target: "/var/www/wedding/"
+
+      - name: Fix permissions
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            cd /var/www/wedding-src
-            git pull origin main
-            npm install
-            npm run build
-            sudo rm -rf /var/www/wedding/*
-            sudo cp -r .next/static /var/www/wedding/
+            sudo chown -R www-data:www-data /var/www/wedding
+            sudo systemctl reload nginx
