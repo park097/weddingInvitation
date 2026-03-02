@@ -1,0 +1,29 @@
+name: Deploy Wedding
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd /var/www/wedding-src
+            git pull origin main
+            npm install
+            npm run build
+            npm run export
+            sudo rm -rf /var/www/wedding/*
+            sudo cp -r out/* /var/www/wedding/
