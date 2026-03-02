@@ -24,6 +24,5 @@ jobs:
             git pull origin main
             npm install
             npm run build
-            npm run export
             sudo rm -rf /var/www/wedding/*
-            sudo cp -r out/* /var/www/wedding/
+            sudo cp -r .next/static /var/www/wedding/
